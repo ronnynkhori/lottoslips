@@ -9,27 +9,54 @@ Web app that always builds **four 20-fold betting slips**, tracks results, sugge
 3. **Under 4.5 Goals**
 4. **Double Chance** (1X / X2)
 
-Seeded with the Aug 25–30 2026 card discussed in chat. Click **New week · 4 slips** to generate another set.
+## Deploy on Vercel
 
-## Features
-
-- Mark each leg **W / L / V / pending**
-- **Rebet suggestions** when the first 1–2 kickoffs lose (rebuilds remaining legs at a reduced stake)
-- **Market rankings** by leg hit-rate, slip hits, and ROI
-- Persistence in `localStorage`
-
-## Run
+### Option A — CLI
 
 ```bash
-cd slip-tracker
+cd slip-tracker   # or this repo root if that's the project
+npm i -g vercel
+vercel
+```
+
+Follow the prompts, then for production:
+
+```bash
+vercel --prod
+```
+
+### Option B — Dashboard
+
+1. Push this project to GitHub / GitLab / Bitbucket  
+2. Go to [vercel.com/new](https://vercel.com/new)  
+3. Import the repo  
+4. Vercel auto-detects **Vite** via `vercel.json`  
+   - Build command: `npm run build`  
+   - Output: `dist`  
+5. Deploy  
+
+SPA routes rewrite to `index.html`. No env vars required (data is `localStorage` in the browser).
+
+## Local development
+
+```bash
 npm install
 npm run dev
 ```
 
-Build:
+Production build check:
 
 ```bash
 npm run build
+npm run preview
 ```
+
+## Features
+
+- Always generates the four core slips  
+- Mark each leg **W / L / V / pending**  
+- **Rebet suggestions** when the first 1–2 kickoffs lose  
+- **Market rankings** by leg hit-rate, slip hits, and ROI  
+- Persistence in `localStorage`
 
 Not betting advice — for tracking lotto-style accumulators only.
