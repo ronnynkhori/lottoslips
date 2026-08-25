@@ -1,7 +1,7 @@
 import type { AppState, Slip, WeekBundle } from '../types'
 import { createWeekBundle, currentWeekKey } from '../data/seedSlips'
 
-const STORAGE_KEY = 'lotto-slips-v1'
+const STORAGE_KEY = 'lotto-slips-v2'
 
 function defaultState(): AppState {
   const week = createWeekBundle(1)

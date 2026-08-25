@@ -122,8 +122,9 @@ export default function App() {
               Lotto<span>Slips</span>
             </h1>
             <p>
-              Always builds the four 20-folds — Team to Score, Over 1.5, Under 4.5, Double Chance —
-              tracks results, suggests rebets after early losses, and ranks the best market.
+              Always builds the four 20-folds — Team Goals (strong sides Over 1.5 / others to
+              score), match Over 1.5, Under 4.5, Double Chance — tracks results, suggests rebets,
+              and ranks the best market.
             </p>
           </div>
           <div className="hero-actions">

@@ -3,7 +3,7 @@ import type { MarketMeta, MarketId, Slip, WeekBundle } from '../types'
 export const MARKETS: Record<MarketId, MarketMeta> = {
   team_to_score: {
     id: 'team_to_score',
-    label: 'Team to Score',
+    label: 'Team Goals',
     shortLabel: 'TTS',
     color: '#1fa97a',
   },
@@ -59,26 +59,29 @@ function leg(
 export function createFourSlips(weekKey: string, stake: number): Slip[] {
   const createdAt = new Date().toISOString()
 
+  // Heavy favourites: team Over 1.5 (score 2+). Others: to score (1+).
   const teamToScore: Slip = {
     id: crypto.randomUUID(),
     marketId: 'team_to_score',
-    title: 'Team to Score · 20-fold',
-    description: 'Each listed side scores ≥1 goal',
+    title: 'Team Goals · 20-fold',
+    description:
+      'Strong sides start at Over 1.5 (2+ goals). Mid/weaker sides use to score (1+).',
     createdAt,
     weekKey,
     stake,
     status: 'open',
     legs: [
-      leg('2026-08-27T18:30:00Z', 'Chelsea', 'Luton', 'Chelsea to score', 93),
-      leg('2026-08-26T18:45:00Z', 'Tottenham', 'Charlton', 'Tottenham to score', 92),
-      leg('2026-08-25T16:00:00Z', 'Al-Ettifaq', 'Al-Nassr', 'Al-Nassr to score', 91),
-      leg('2026-08-27T19:00:00Z', 'Barcelona', 'Athletic', 'Barcelona to score', 90),
-      leg('2026-08-26T19:00:00Z', 'Real Madrid', 'Real Sociedad', 'Real Madrid to score', 90),
-      leg('2026-08-25T19:00:00Z', 'Bodø/Glimt', 'NEC', 'Bodø/Glimt to score', 90),
-      leg('2026-08-27T19:00:00Z', 'Fulham', 'AFC Wimbledon', 'Fulham to score', 89),
-      leg('2026-08-25T19:00:00Z', 'LASK', 'Celtic', 'Celtic to score', 88),
+      leg('2026-08-26T18:45:00Z', 'Tottenham', 'Charlton', 'Tottenham Over 1.5', 86),
+      leg('2026-08-27T18:30:00Z', 'Chelsea', 'Luton', 'Chelsea Over 1.5', 84),
+      leg('2026-08-25T16:00:00Z', 'Al-Ettifaq', 'Al-Nassr', 'Al-Nassr Over 1.5', 83),
+      leg('2026-08-27T19:00:00Z', 'Fulham', 'AFC Wimbledon', 'Fulham Over 1.5', 81),
+      leg('2026-08-30T15:00:00Z', 'Real Madrid', 'Málaga', 'Real Madrid Over 1.5', 81),
+      leg('2026-08-25T19:00:00Z', 'Bodø/Glimt', 'NEC', 'Bodø/Glimt Over 1.5', 79),
+      leg('2026-08-27T19:00:00Z', 'Barcelona', 'Athletic', 'Barcelona Over 1.5', 78),
+      leg('2026-08-26T19:00:00Z', 'Real Madrid', 'Real Sociedad', 'Real Madrid Over 1.5', 76),
+      leg('2026-08-25T19:00:00Z', 'LASK', 'Celtic', 'Celtic Over 1.5', 75),
+      leg('2026-08-28T19:00:00Z', 'Crystal Palace', 'Man City', 'Man City Over 1.5', 75),
       leg('2026-08-26T18:45:00Z', 'Newcastle', 'West Brom', 'Newcastle to score', 87),
-      leg('2026-08-25T19:00:00Z', 'LASK', 'Celtic', 'LASK to score', 86),
       leg('2026-08-26T19:00:00Z', 'Lyon', 'Fenerbahçe', 'Lyon to score', 85),
       leg('2026-08-26T19:00:00Z', 'AEK Athens', 'Levski', 'AEK Athens to score', 84),
       leg('2026-08-25T18:45:00Z', 'Sheff Wed', 'Wolves', 'Wolves to score', 83),
@@ -88,7 +91,6 @@ export function createFourSlips(weekKey: string, stake: number): Slip[] {
       leg('2026-08-26T19:00:00Z', 'Preston', 'Everton', 'Everton to score', 80),
       leg('2026-08-25T19:00:00Z', 'Nott’m Forest', 'Leeds', 'Nott’m Forest to score', 77),
       leg('2026-08-25T19:00:00Z', 'Valencia', 'Real Betis', 'Real Betis to score', 76),
-      leg('2026-08-26T19:00:00Z', 'Lyon', 'Fenerbahçe', 'Fenerbahçe to score', 75),
     ],
   }
 

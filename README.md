@@ -4,9 +4,9 @@ Web app that always builds **four 20-fold betting slips**, tracks results, sugge
 
 ## Markets
 
-1. **Team to Score**
-2. **Over 1.5 Goals**
-3. **Under 4.5 Goals**
+1. **Team Goals (TTS)** — heavy favourites use **team Over 1.5** (2+ goals); others use **to score** (1+)
+2. **Over 1.5 Goals** — match total
+3. **Under 4.5 Goals** — match total
 4. **Double Chance** (1X / X2)
 
 ## Deploy on Vercel
