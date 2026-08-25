@@ -266,10 +266,46 @@ a {
 
 .legs {
   display: grid;
-  gap: 0.45rem;
-  max-height: 28rem;
+  gap: 0.85rem;
+  max-height: 34rem;
   overflow: auto;
   padding-right: 0.2rem;
+}
+
+.comp-group {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.comp-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.15rem 0.15rem 0.35rem;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: rgba(18, 28, 24, 0.94);
+  z-index: 1;
+}
+
+.comp-group-head h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  letter-spacing: -0.02em;
+}
+
+.comp-group-head span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+}
+
+.comp-group-legs {
+  display: grid;
+  gap: 0.4rem;
 }
 
 .leg {
@@ -310,6 +346,17 @@ a {
   margin-top: 0.2rem;
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.comp-tag {
+  color: var(--text);
+  opacity: 0.78;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.05rem 0.45rem;
 }
 
 .leg-actions {

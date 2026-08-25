@@ -13,6 +13,8 @@ export interface Leg {
   kickoff: string // ISO date
   home: string
   away: string
+  /** League or cup name */
+  competition: string
   /** Display selection text */
   selection: string
   /** Estimated probability 0–100 */

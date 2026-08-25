@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { MARKETS } from '../data/seedSlips'
 import type { Leg, LegResult, Slip } from '../types'
 import { potentialReturn, slipLegSummary } from '../lib/stats'
@@ -11,6 +12,40 @@ function formatKickoff(iso: string) {
     hour: '2-digit',
     minute: '2-digit',
   })
+}
+
+/** Preferred display order for competitions */
+const COMP_ORDER = [
+  'Premier League',
+  'La Liga',
+  'EFL Cup',
+  'UCL Play-offs',
+  'Saudi Pro League',
+]
+
+function groupLegsByCompetition(legs: Leg[]): { competition: string; legs: Leg[] }[] {
+  const map = new Map<string, Leg[]>()
+  for (const leg of legs) {
+    const key = leg.competition?.trim() || 'Other'
+    const list = map.get(key) ?? []
+    list.push(leg)
+    map.set(key, list)
+  }
+
+  for (const list of map.values()) {
+    list.sort((a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime())
+  }
+
+  return [...map.entries()]
+    .map(([competition, groupLegs]) => ({ competition, legs: groupLegs }))
+    .sort((a, b) => {
+      const ai = COMP_ORDER.indexOf(a.competition)
+      const bi = COMP_ORDER.indexOf(b.competition)
+      const ao = ai === -1 ? 999 : ai
+      const bo = bi === -1 ? 999 : bi
+      if (ao !== bo) return ao - bo
+      return a.competition.localeCompare(b.competition)
+    })
 }
 
 const RESULTS: { key: LegResult; label: string }[] = [
@@ -29,6 +64,7 @@ export function SlipPanel({ slip, onSetResult }: Props) {
   const meta = MARKETS[slip.marketId]
   const summary = slipLegSummary(slip)
   const estReturn = potentialReturn(slip)
+  const groups = useMemo(() => groupLegsByCompetition(slip.legs), [slip.legs])
 
   return (
     <div>
@@ -49,17 +85,27 @@ export function SlipPanel({ slip, onSetResult }: Props) {
         {(
           slip.legs.reduce((s, l) => s + l.probability, 0) / Math.max(1, slip.legs.length)
         ).toFixed(0)}
-        %
+        % · {groups.length} competitions
       </p>
 
       <div className="legs">
-        {slip.legs.map((leg) => (
-          <LegRow
-            key={leg.id}
-            leg={leg}
-            accent={meta.color}
-            onSetResult={(result) => onSetResult(leg.id, result)}
-          />
+        {groups.map((group) => (
+          <section key={group.competition} className="comp-group">
+            <header className="comp-group-head">
+              <h3>{group.competition}</h3>
+              <span>{group.legs.length} legs</span>
+            </header>
+            <div className="comp-group-legs">
+              {group.legs.map((leg) => (
+                <LegRow
+                  key={leg.id}
+                  leg={leg}
+                  accent={meta.color}
+                  onSetResult={(result) => onSetResult(leg.id, result)}
+                />
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </div>
