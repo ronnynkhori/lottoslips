@@ -65,7 +65,14 @@ export function SlipPanel({ slip, onSetResult }: Props) {
   const meta = MARKETS[slip.marketId]
   const summary = slipLegSummary(slip)
   const estReturn = potentialReturn(slip)
-  const groups = useMemo(() => groupLegsByCompetition(slip.legs), [slip.legs])
+  const sortByProb = slip.marketId === 'straight_win'
+  const groups = useMemo(() => {
+    if (sortByProb) {
+      const sorted = [...slip.legs].sort((a, b) => b.probability - a.probability)
+      return [{ competition: 'By probability (80%+)', legs: sorted }]
+    }
+    return groupLegsByCompetition(slip.legs)
+  }, [slip.legs, sortByProb])
 
   return (
     <div>
@@ -86,7 +93,10 @@ export function SlipPanel({ slip, onSetResult }: Props) {
         {(
           slip.legs.reduce((s, l) => s + l.probability, 0) / Math.max(1, slip.legs.length)
         ).toFixed(0)}
-        % · {groups.length} competitions
+        %
+        {sortByProb
+          ? ` · sorted high→low · min ${Math.min(...slip.legs.map((l) => l.probability))}%`
+          : ` · ${groups.length} competitions`}
       </p>
 
       <div className="legs">
@@ -102,6 +112,7 @@ export function SlipPanel({ slip, onSetResult }: Props) {
                   key={leg.id}
                   leg={leg}
                   accent={meta.color}
+                  showCompetition={sortByProb}
                   onSetResult={(result) => onSetResult(leg.id, result)}
                 />
               ))}
@@ -117,10 +128,12 @@ function LegRow({
   leg,
   accent,
   onSetResult,
+  showCompetition,
 }: {
   leg: Leg
   accent: string
   onSetResult: (result: LegResult) => void
+  showCompetition?: boolean
 }) {
   return (
     <div className={`leg ${leg.result}`}>
@@ -130,6 +143,7 @@ function LegRow({
         </div>
         <div className="leg-sub">
           <span style={{ color: accent }}>{leg.selection}</span>
+          {showCompetition && <span>{leg.competition}</span>}
           <span>{formatKickoff(leg.kickoff)}</span>
           <span>{leg.probability}%</span>
           <span className="leg-odds">@{leg.odds?.toFixed(2) ?? '—'}</span>
