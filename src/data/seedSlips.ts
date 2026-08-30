@@ -45,6 +45,20 @@ export function createSlipsFromCard(card: WeeklyCard, stake: number): Slip[] {
   return MARKET_ORDER.flatMap((marketId) => {
     const draft = card.markets[marketId]
     if (!draft?.legs?.length) return []
+    let legs = draft.legs.map(toLeg)
+    if (marketId === 'straight_win') {
+      legs = legs
+        .filter((l) => l.probability > 80)
+        .sort(
+          (a, b) =>
+            b.probability - a.probability ||
+            new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime(),
+        )
+    } else {
+      legs = [...legs].sort(
+        (a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime(),
+      )
+    }
     const slip: Slip = {
       id: crypto.randomUUID(),
       marketId,
@@ -54,9 +68,7 @@ export function createSlipsFromCard(card: WeeklyCard, stake: number): Slip[] {
       weekKey,
       stake,
       status: 'open',
-      legs: draft.legs
-        .map(toLeg)
-        .sort((a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime()),
+      legs,
     }
     return [slip]
   })
