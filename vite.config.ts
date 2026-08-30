@@ -1,10 +1,12 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
-// https://vite.dev/config/
+// GitHub Pages serves at /lottoslips/ — absolute base avoids "./" breaking
+// when the URL has no trailing slash (which caused Forbidden/404 on assets).
+const base = process.env.VITE_BASE ?? '/'
+
 export default defineConfig({
-  // Relative base so Vercel and GitHub Pages (/lottoslips/) both work
-  base: './',
+  base,
   plugins: [react()],
   build: {
     outDir: 'dist',
