@@ -12,7 +12,8 @@ import { MARKET_ORDER } from './markets'
 export { CARD_VERSION, MARKETS, MARKET_ORDER } from './markets'
 export type { WeeklyCard }
 
-const CARD_URL = '/cards/current.json'
+const CARD_URL = `${import.meta.env.BASE_URL}cards/current.json`
+
 
 function toLeg(draft: CardLegDraft): Leg {
   return {
