@@ -345,9 +345,9 @@ export default function App() {
       </div>
 
       <p className="footer-note">
-        Card v{card.cardVersion || CARD_VERSION} from <code>/cards/current.json</code>. Odds on
-        every leg · FT score settle. Use <strong>Reload fixtures</strong> after updating the JSON.{' '}
-        Not betting advice.
+        Card v{card.cardVersion || CARD_VERSION} from <code>/cards/current.json</code> · PL, Liga,
+        EFL, FA Cup, UCL, Saudi. Odds + FT settle. <strong>Reload fixtures</strong> after card
+        updates. Not betting advice.
       </p>
     </div>
   )
