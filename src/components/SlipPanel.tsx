@@ -19,7 +19,8 @@ const COMP_ORDER = [
   'Premier League',
   'La Liga',
   'EFL Cup',
-  'UCL Play-offs',
+  'FA Cup',
+  'UCL',
   'Saudi Pro League',
 ]
 
