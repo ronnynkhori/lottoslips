@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:pages": "tsc -b && VITE_BASE=/lottoslips/ vite build",
+    "deploy:pages": "npm run build:pages && cp dist/index.html dist/404.html && npx --yes gh-pages -d dist -m \"deploy pages\"",
     "lint": "oxlint",
     "preview": "vite preview"
   },
+  "homepage": "https://ronnynkhori.github.io/lottoslips/",
   "engines": {
     "node": ">=20"
   },
