@@ -4,7 +4,10 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!assets/|cards/|inspire/|favicon\\.svg).*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
@@ -13,6 +16,10 @@
     },
     {
       "source": "/",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    },
+    {
+      "source": "/cards/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
     },
     {
