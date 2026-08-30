@@ -1,4 +1,4 @@
-import { MARKETS } from '../data/seedSlips'
+import { MARKETS } from '../data/markets'
 import type { Leg, RebetSuggestion, Slip } from '../types'
 import { chronologicalLegs, slipLegSummary } from './stats'
 

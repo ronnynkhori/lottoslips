@@ -1,4 +1,4 @@
-import { MARKETS } from '../data/seedSlips'
+import { MARKETS } from '../data/markets'
 import type { MarketStats } from '../types'
 
 interface Props {
@@ -15,7 +15,8 @@ export function RankingsPanel({ stats, bestId }: Props) {
       <div className="panel-body">
         {stats.every((s) => s.legsPlayed === 0) ? (
           <p className="empty">
-            Mark legs W/L to rank markets. Score weights leg hit-rate first, then ROI and full-slip hits.
+            Mark legs or apply FT scores. Rankings use odds-backed ROI (once slips settle) and edge
+            vs average odds.
           </p>
         ) : (
           <div className="rank-list">
@@ -30,8 +31,9 @@ export function RankingsPanel({ stats, bestId }: Props) {
                   <div>
                     <h3 style={{ color }}>{s.label}</h3>
                     <p>
-                      Legs {s.legsWon}/{s.legsPlayed} ({s.legHitRate.toFixed(0)}%) · slips{' '}
-                      {s.fullHits}/{s.settledSlips || 0} · ROI {s.roi.toFixed(0)}%
+                      Legs {s.legsWon}/{s.legsPlayed} ({s.legHitRate.toFixed(0)}%) · avg odds{' '}
+                      {s.avgOdds ? s.avgOdds.toFixed(2) : '—'} · slips {s.fullHits}/
+                      {s.settledSlips || 0} · ROI {s.roi.toFixed(0)}%
                     </p>
                   </div>
                   <div className="rank-score">

@@ -631,6 +631,74 @@ a {
   font-size: 0.74rem;
 }
 
+.leg-odds {
+  font-family: var(--font-mono);
+  color: var(--warn);
+}
+
+.scores-list {
+  display: grid;
+  gap: 0.55rem;
+  max-height: 28rem;
+  overflow: auto;
+  padding-right: 0.15rem;
+}
+
+.score-row {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.score-row.saved {
+  border-color: rgba(45, 202, 140, 0.35);
+}
+
+.score-meta {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.score-meta strong {
+  font-size: 0.86rem;
+}
+
+.score-meta small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.score-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.score-inputs input {
+  width: 3.2rem;
+  padding: 0.35rem 0.4rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg0);
+  color: var(--text);
+  font-family: var(--font-mono);
+}
+
+.score-inputs span {
+  color: var(--muted);
+}
+
+.footer-note code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--warn);
+}
+
 @media (max-width: 720px) {
   .market-tabs {
     grid-template-columns: repeat(3, minmax(0, 1fr));

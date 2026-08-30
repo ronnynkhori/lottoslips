@@ -1,14 +1,19 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CARD_VERSION, MARKETS, MARKET_ORDER, createWeekBundle } from './data/seedSlips'
+import { CARD_VERSION, MARKETS, MARKET_ORDER, loadWeeklyCard } from './data/seedSlips'
 import { SlipPanel } from './components/SlipPanel'
 import { RankingsPanel } from './components/RankingsPanel'
 import { RebetPanel } from './components/RebetPanel'
 import { ResultsBoard } from './components/ResultsBoard'
+import { ScoresPanel } from './components/ScoresPanel'
 import { buildRebetSlip, getRebetSuggestions } from './lib/rebet'
+import { applyScoresToSlips } from './lib/settle'
 import { bestMarket, computeMarketStats } from './lib/stats'
 import {
   addSlipToWeek,
+  applyFetchedCard,
+  createNewWeek,
   ensureActiveWeek,
+  getActiveCard,
   getActiveWeek,
   hardResetState,
   loadState,
@@ -24,10 +29,25 @@ export default function App() {
   const [activeMarket, setActiveMarket] = useState<MarketId>('team_to_score')
   const [dismissedRebets, setDismissedRebets] = useState<string[]>([])
   const [flash, setFlash] = useState<string | null>(null)
+  const [cardLoading, setCardLoading] = useState(true)
 
   useEffect(() => {
     saveState(state)
   }, [state])
+
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      const card = await loadWeeklyCard()
+      if (cancelled) return
+      setState((prev) => applyFetchedCard(prev, card))
+      setCardLoading(false)
+      setFlash(`Card v${card.cardVersion} loaded · ${card.label}`)
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
     if (!flash) return
@@ -37,6 +57,8 @@ export default function App() {
 
   const week = getActiveWeek(state)
   const slips = week?.slips ?? []
+  const scores = state.scores ?? {}
+  const card = getActiveCard()
 
   const primarySlips = useMemo(
     () =>
@@ -67,7 +89,11 @@ export default function App() {
     if (!week) return
     setState((prev) =>
       updateSlipInState(prev, week.weekKey, slipId, (slip) => {
-        const legs = slip.legs.map((l) => (l.id === legId ? { ...l, result } : l))
+        const legs = slip.legs.map((l) =>
+          l.id === legId
+            ? { ...l, result, resultSource: result === 'pending' ? undefined : ('manual' as const) }
+            : l,
+        )
         const pending = legs.some((l) => l.result === 'pending')
         return { ...slip, legs, status: pending ? 'open' : 'settled' }
       }),
@@ -86,29 +112,17 @@ export default function App() {
   }
 
   function newWeek() {
-    const weekBundle = createWeekBundle(state.defaultStake)
-    const key = `${weekBundle.weekKey}-${Date.now()}`
-    const next = {
-      ...weekBundle,
-      weekKey: key,
-      label: `${weekBundle.label} (new)`,
-      slips: weekBundle.slips.map((s) => ({ ...s, weekKey: key, stake: state.defaultStake })),
-    }
-    setState((prev) => ({
-      ...prev,
-      weeks: [next, ...prev.weeks],
-      activeWeekKey: key,
-      cardVersion: CARD_VERSION,
-    }))
+    setState((prev) => createNewWeek(prev, getActiveCard()))
     setDismissedRebets([])
     setActiveMarket('team_to_score')
-    setFlash('New week loaded with latest fixture card')
+    setFlash('New week loaded from current card')
   }
 
   function clearResultsOnly() {
     if (!week) return
     setState((prev) => ({
       ...prev,
+      scores: {},
       weeks: prev.weeks.map((w) => {
         if (w.weekKey !== week.weekKey) return w
         return {
@@ -116,28 +130,67 @@ export default function App() {
           slips: w.slips.map((s) => ({
             ...s,
             status: 'open' as const,
-            legs: s.legs.map((l) => ({ ...l, result: 'pending' as const })),
+            legs: s.legs.map((l) => ({
+              ...l,
+              result: 'pending' as const,
+              resultSource: undefined,
+            })),
           })),
         }
       }),
     }))
     setDismissedRebets([])
-    setFlash('All W/L/V marks cleared on this week')
+    setFlash('All W/L/V marks and FT scores cleared')
   }
 
-  function reloadFixtures() {
-    setState((prev) => replaceActiveWeek(prev))
+  async function reloadFixtures() {
+    setCardLoading(true)
+    const nextCard = await loadWeeklyCard()
+    setState((prev) => replaceActiveWeek(applyFetchedCard(prev, nextCard), nextCard))
     setDismissedRebets([])
     setActiveMarket('team_to_score')
-    setFlash('Fixtures reloaded · Aug 31–Sep 6 card')
+    setCardLoading(false)
+    setFlash(`Fixtures reloaded · card v${nextCard.cardVersion}`)
   }
 
   function fullReset() {
-    const next = hardResetState(state.defaultStake)
+    const next = hardResetState(state.defaultStake, getActiveCard())
     setState(next)
     setDismissedRebets([])
     setActiveMarket('team_to_score')
     setFlash('Full reset · fresh slips + empty results')
+  }
+
+  function setScore(key: string, home: number, away: number) {
+    setState((prev) => ({
+      ...prev,
+      scores: { ...(prev.scores ?? {}), [key]: { home, away } },
+    }))
+  }
+
+  function clearScore(key: string) {
+    setState((prev) => {
+      const next = { ...(prev.scores ?? {}) }
+      delete next[key]
+      return { ...prev, scores: next }
+    })
+  }
+
+  function applyScores() {
+    if (!week) return
+    const map = state.scores ?? {}
+    if (!Object.keys(map).length) {
+      setFlash('Save at least one FT score first')
+      return
+    }
+    setState((prev) => ({
+      ...prev,
+      weeks: prev.weeks.map((w) => {
+        if (w.weekKey !== week.weekKey) return w
+        return { ...w, slips: applyScoresToSlips(w.slips, map) }
+      }),
+    }))
+    setFlash('Legs settled from FT scores')
   }
 
   return (
@@ -149,8 +202,8 @@ export default function App() {
               Lotto<span>Slips</span>
             </h1>
             <p>
-              Four slips + MIX: TTS is underdog Over 0.5 only (better odds), then O1.5, U4.5,
-              DC, and Mixed 85+. Mark W/L/V to self-check. Skip TTS if no team Over 0.5 market.
+              Weekly card from JSON · real odds on every leg · FT scores settle TTS / O1.5 / U4.5 /
+              DC. Mixed 85+ still manual-friendly. Skip TTS if no Over 0.5 market.
             </p>
           </div>
           <div className="hero-actions">
@@ -182,7 +235,12 @@ export default function App() {
                 </option>
               ))}
             </select>
-            <button type="button" className="btn btn-primary" onClick={reloadFixtures}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => void reloadFixtures()}
+              disabled={cardLoading}
+            >
               Reload fixtures
             </button>
             <button type="button" className="btn" onClick={newWeek}>
@@ -204,7 +262,8 @@ export default function App() {
           <div className="panel-head">
             <h2>{week?.label ?? 'Active week'}</h2>
             <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>
-              {primarySlips.length}/5 slips · card v{CARD_VERSION}
+              {primarySlips.length}/5 slips · card v{card.cardVersion || CARD_VERSION}
+              {cardLoading ? ' · loading…' : ''}
             </span>
           </div>
           <div className="panel-body">
@@ -233,9 +292,8 @@ export default function App() {
             </div>
 
             <p className="check-hint">
-              Self-check: after each kickoff, mark the leg <strong>W</strong> (hit),{' '}
-              <strong>L</strong> (miss), or <strong>V</strong> (skip/no market). Open{' '}
-              <em>Self-check results</em> on the right to review.
+              Self-check: enter <strong>FT scores</strong> on the right and Apply, or mark each leg{' '}
+              <strong>W</strong> / <strong>L</strong> / <strong>V</strong> manually.
             </p>
 
             {activeSlip ? (
@@ -269,6 +327,13 @@ export default function App() {
         </section>
 
         <aside className="side-stack">
+          <ScoresPanel
+            slips={slips}
+            scores={scores}
+            onSetScore={setScore}
+            onClearScore={clearScore}
+            onApplyScores={applyScores}
+          />
           <ResultsBoard slips={slips} onJumpMarket={setActiveMarket} />
           <RebetPanel
             suggestions={suggestions}
@@ -280,9 +345,9 @@ export default function App() {
       </div>
 
       <p className="footer-note">
-        Card v{CARD_VERSION}: Aug 31–Sep 6 (+ early MD4). Data in localStorage. Use{' '}
-        <strong>Reload fixtures</strong> if slips look stale, <strong>Full reset</strong> to wipe
-        everything. Not betting advice.
+        Card v{card.cardVersion || CARD_VERSION} from <code>/cards/current.json</code>. Odds on
+        every leg · FT score settle. Use <strong>Reload fixtures</strong> after updating the JSON.{' '}
+        Not betting advice.
       </p>
     </div>
   )
