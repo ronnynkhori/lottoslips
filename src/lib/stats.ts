@@ -1,4 +1,4 @@
-import { MARKETS, MARKET_ORDER } from '../data/seedSlips'
+import { MARKETS, MARKET_ORDER } from '../data/markets'
 import type { Leg, MarketId, MarketStats, Slip, WeekBundle } from '../types'
 
 export function slipLegSummary(slip: Slip) {
@@ -33,13 +33,16 @@ export function firstSettledLegs(slip: Slip, n = 2): Leg[] {
     .slice(0, n)
 }
 
+export function legOdds(leg: Leg): number {
+  if (leg.odds && leg.odds > 1) return leg.odds
+  const p = Math.min(0.95, Math.max(0.5, leg.probability / 100))
+  return 1 / p
+}
+
 export function estimateCombinedOdds(legs: Leg[]): number {
   return legs.reduce((acc, leg) => {
     if (leg.result === 'void') return acc
-    if (leg.odds && leg.odds > 1) return acc * leg.odds
-    // Approximate decimal odds from probability
-    const p = Math.min(0.95, Math.max(0.5, leg.probability / 100))
-    return acc * (1 / p)
+    return acc * legOdds(leg)
   }, 1)
 }
 
@@ -49,6 +52,10 @@ export function potentialReturn(slip: Slip): number {
   return Number((slip.stake * estimateCombinedOdds(active)).toFixed(2))
 }
 
+/**
+ * Rank markets on odds-backed ROI first (once enough settled slips),
+ * otherwise on leg hit-rate vs average odds (rough CLV proxy).
+ */
 export function computeMarketStats(weeks: WeekBundle[]): MarketStats[] {
   const allSlips = weeks.flatMap((w) => w.slips)
 
@@ -63,12 +70,14 @@ export function computeMarketStats(weeks: WeekBundle[]): MarketStats[] {
     let unitsReturned = 0
     let settledSlips = 0
     let fullHits = 0
+    let oddsSum = 0
 
     for (const slip of pool) {
       const summary = slipLegSummary(slip)
       const playedLegs = slip.legs.filter((l) => l.result === 'won' || l.result === 'lost')
       legsPlayed += playedLegs.length
       legsWon += playedLegs.filter((l) => l.result === 'won').length
+      oddsSum += playedLegs.reduce((s, l) => s + legOdds(l), 0)
 
       if (summary.complete) {
         settledSlips += 1
@@ -83,12 +92,21 @@ export function computeMarketStats(weeks: WeekBundle[]): MarketStats[] {
     const legHitRate = legsPlayed ? (legsWon / legsPlayed) * 100 : 0
     const slipHitRate = settledSlips ? (fullHits / settledSlips) * 100 : 0
     const roi = unitsStaked ? ((unitsReturned - unitsStaked) / unitsStaked) * 100 : 0
+    const avgOdds = legsPlayed ? oddsSum / legsPlayed : 0
 
-    // Rank score blends leg reliability (main signal for long folds) + ROI when settled
+    // Expected leg win% from avg odds (ignore void); positive edge → hit rate > 1/avgOdds
+    const impliedWinPct = avgOdds > 1 ? (1 / avgOdds) * 100 : 0
+    const edgePts = legsPlayed >= 5 ? legHitRate - impliedWinPct : 0
+
+    // Prefer ROI once ≥2 slips settled; else edge vs odds + reliability
     const rankScore =
-      legHitRate * 0.7 +
-      Math.min(100, Math.max(0, 50 + roi / 2)) * 0.2 +
-      slipHitRate * 0.1
+      settledSlips >= 2
+        ? Math.min(100, Math.max(0, 50 + roi / 2)) * 0.55 +
+          Math.min(100, Math.max(0, 50 + edgePts * 2)) * 0.25 +
+          slipHitRate * 0.2
+        : Math.min(100, Math.max(0, 50 + edgePts * 2)) * 0.45 +
+          legHitRate * 0.4 +
+          Math.min(100, Math.max(0, 50 + roi / 2)) * 0.15
 
     return {
       marketId,
@@ -103,12 +121,13 @@ export function computeMarketStats(weeks: WeekBundle[]): MarketStats[] {
       unitsStaked,
       unitsReturned,
       roi,
+      avgOdds,
       rankScore,
     }
   }).sort((a, b) => b.rankScore - a.rankScore)
 }
 
 export function bestMarket(weeks: WeekBundle[]): MarketId | null {
-  const stats = computeMarketStats(weeks).filter((s) => s.legsPlayed >= 3)
+  const stats = computeMarketStats(weeks).filter((s) => s.legsPlayed >= 5)
   return stats[0]?.marketId ?? null
 }

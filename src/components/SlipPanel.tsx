@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { MARKETS } from '../data/seedSlips'
+import { MARKETS } from '../data/markets'
 import type { Leg, LegResult, Slip } from '../types'
 import { potentialReturn, slipLegSummary } from '../lib/stats'
 
@@ -131,6 +131,7 @@ function LegRow({
           <span style={{ color: accent }}>{leg.selection}</span>
           <span>{formatKickoff(leg.kickoff)}</span>
           <span>{leg.probability}%</span>
+          <span className="leg-odds">@{leg.odds?.toFixed(2) ?? '—'}</span>
         </div>
       </div>
       <div className="leg-actions">
