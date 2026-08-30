@@ -54,6 +54,20 @@ export function createSlipsFromCard(card: WeeklyCard, stake: number): Slip[] {
             b.probability - a.probability ||
             new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime(),
         )
+    } else if (marketId === 'mixed') {
+      // One leg per fixture — keep highest probability if duplicates slip in
+      legs = [...legs]
+        .sort((a, b) => b.probability - a.probability)
+        .filter((leg, _i, arr) => {
+          const key = `${leg.kickoff}|${leg.home}|${leg.away}`
+          return arr.findIndex((x) => `${x.kickoff}|${x.home}|${x.away}` === key) ===
+            arr.indexOf(leg)
+        })
+        .sort(
+          (a, b) =>
+            b.probability - a.probability ||
+            new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime(),
+        )
     } else {
       legs = [...legs].sort(
         (a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime(),

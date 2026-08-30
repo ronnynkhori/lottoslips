@@ -1,8 +1,8 @@
 {
-  "cardVersion": 12,
+  "cardVersion": 13,
   "weekKey": "2026-W36",
   "label": "Week 36 · PL / Liga / Cups",
-  "updatedAt": "2026-08-30T19:58:46.438Z",
+  "updatedAt": "2026-08-30T20:08:13.031Z",
   "markets": {
     "team_to_score": {
       "title": "Underdog TTS · 30-fold",
@@ -1484,8 +1484,8 @@
       ]
     },
     "mixed": {
-      "title": "Mixed 85+ · 24-fold",
-      "description": "High-prob mix (≥85%): DC favourites, Over 1.5, Under 4.5 — no short favourite TTS.",
+      "title": "Mixed 85+ · 20-fold",
+      "description": "High-prob mix (≥85%): one leg per match only — DC, Over 1.5, Under 4.5, or SW. No repeat fixtures.",
       "legs": [
         {
           "kickoff": "2026-09-05T14:00:00Z",
@@ -1543,26 +1543,6 @@
           "dcSide": "X2"
         },
         {
-          "kickoff": "2026-09-05T14:00:00Z",
-          "home": "Man City",
-          "away": "Coventry",
-          "competition": "Premier League",
-          "selection": "Over 1.5",
-          "probability": 92,
-          "odds": 1.05,
-          "settleKind": "over_1_5"
-        },
-        {
-          "kickoff": "2026-08-31T16:30:00Z",
-          "home": "Osasuna",
-          "away": "Getafe",
-          "competition": "La Liga",
-          "selection": "Under 4.5",
-          "probability": 92,
-          "odds": 1.05,
-          "settleKind": "under_4_5"
-        },
-        {
           "kickoff": "2026-09-04T19:00:00Z",
           "home": "Real Betis",
           "away": "Real Madrid",
@@ -1585,25 +1565,14 @@
           "dcSide": "X2"
         },
         {
-          "kickoff": "2026-08-31T18:30:00Z",
-          "home": "Barcelona",
-          "away": "Rayo Vallecano",
+          "kickoff": "2026-08-31T16:30:00Z",
+          "home": "Osasuna",
+          "away": "Getafe",
           "competition": "La Liga",
-          "selection": "Over 1.5",
-          "probability": 91,
+          "selection": "Under 4.5",
+          "probability": 92,
           "odds": 1.05,
-          "settleKind": "over_1_5"
-        },
-        {
-          "kickoff": "2026-09-12T14:00:00Z",
-          "home": "Liverpool",
-          "away": "Fulham",
-          "competition": "Premier League",
-          "selection": "Liverpool 1X",
-          "probability": 91,
-          "odds": 1.05,
-          "settleKind": "double_chance",
-          "dcSide": "1X"
+          "settleKind": "under_4_5"
         },
         {
           "kickoff": "2026-09-06T14:15:00Z",
@@ -1617,24 +1586,15 @@
           "dcSide": "X2"
         },
         {
-          "kickoff": "2026-09-17T19:00:00Z",
-          "home": "Bayern Munich",
-          "away": "Dinamo Zagreb",
-          "competition": "UCL",
-          "selection": "Over 1.5",
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Liverpool",
+          "away": "Fulham",
+          "competition": "Premier League",
+          "selection": "Liverpool 1X",
           "probability": 91,
           "odds": 1.05,
-          "settleKind": "over_1_5"
-        },
-        {
-          "kickoff": "2026-09-06T15:30:00Z",
-          "home": "Arsenal",
-          "away": "Chelsea",
-          "competition": "Premier League",
-          "selection": "Over 1.5",
-          "probability": 90,
-          "odds": 1.06,
-          "settleKind": "over_1_5"
+          "settleKind": "double_chance",
+          "dcSide": "1X"
         },
         {
           "kickoff": "2026-09-12T19:00:00Z",
@@ -1648,14 +1608,15 @@
           "dcSide": "X2"
         },
         {
-          "kickoff": "2026-09-13T15:30:00Z",
-          "home": "Man United",
-          "away": "Man City",
-          "competition": "Premier League",
-          "selection": "Over 1.5",
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Inter",
+          "away": "Ajax",
+          "competition": "UCL",
+          "selection": "Inter 1X",
           "probability": 90,
           "odds": 1.06,
-          "settleKind": "over_1_5"
+          "settleKind": "double_chance",
+          "dcSide": "1X"
         },
         {
           "kickoff": "2026-09-05T14:00:00Z",
@@ -1666,6 +1627,36 @@
           "probability": 90,
           "odds": 1.06,
           "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-18T12:30:00Z",
+          "home": "Luton",
+          "away": "Millwall",
+          "competition": "FA Cup",
+          "selection": "Under 4.5",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-06T15:30:00Z",
+          "home": "Arsenal",
+          "away": "Chelsea",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-13T15:30:00Z",
+          "home": "Man United",
+          "away": "Man City",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "over_1_5"
         },
         {
           "kickoff": "2026-09-01T19:00:00Z",
@@ -1679,34 +1670,14 @@
         },
         {
           "kickoff": "2026-09-18T12:30:00Z",
-          "home": "Luton",
-          "away": "Millwall",
+          "home": "Arsenal",
+          "away": "Accrington",
           "competition": "FA Cup",
-          "selection": "Under 4.5",
+          "selection": "Arsenal win",
           "probability": 90,
-          "odds": 1.06,
-          "settleKind": "under_4_5"
-        },
-        {
-          "kickoff": "2026-09-17T19:00:00Z",
-          "home": "Inter",
-          "away": "Ajax",
-          "competition": "UCL",
-          "selection": "Inter 1X",
-          "probability": 90,
-          "odds": 1.06,
-          "settleKind": "double_chance",
-          "dcSide": "1X"
-        },
-        {
-          "kickoff": "2026-09-04T19:00:00Z",
-          "home": "Ipswich",
-          "away": "Liverpool",
-          "competition": "Premier League",
-          "selection": "Over 1.5",
-          "probability": 89,
           "odds": 1.07,
-          "settleKind": "over_1_5"
+          "settleKind": "straight_win",
+          "winSide": "home"
         },
         {
           "kickoff": "2026-09-05T14:00:00Z",
@@ -1717,16 +1688,6 @@
           "probability": 89,
           "odds": 1.07,
           "settleKind": "under_4_5"
-        },
-        {
-          "kickoff": "2026-09-04T19:00:00Z",
-          "home": "Real Betis",
-          "away": "Real Madrid",
-          "competition": "La Liga",
-          "selection": "Over 1.5",
-          "probability": 88,
-          "odds": 1.08,
-          "settleKind": "over_1_5"
         },
         {
           "kickoff": "2026-08-31T19:00:00Z",
