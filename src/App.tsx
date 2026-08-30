@@ -149,9 +149,8 @@ export default function App() {
               Lotto<span>Slips</span>
             </h1>
             <p>
-              Four 20-folds (TTS Over 0.5, O1.5, U4.5, DC), grouped by league. Mark W/L/V to
-              self-check — results show in the side panel. Skip TTS legs with no team Over 0.5
-              market.
+              Four slips + MIX: TTS is underdog Over 0.5 only (better odds), then O1.5, U4.5,
+              DC, and Mixed 85+. Mark W/L/V to self-check. Skip TTS if no team Over 0.5 market.
             </p>
           </div>
           <div className="hero-actions">
@@ -205,7 +204,7 @@ export default function App() {
           <div className="panel-head">
             <h2>{week?.label ?? 'Active week'}</h2>
             <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>
-              {primarySlips.length}/4 core slips · card v{CARD_VERSION}
+              {primarySlips.length}/5 slips · card v{CARD_VERSION}
             </span>
           </div>
           <div className="panel-body">

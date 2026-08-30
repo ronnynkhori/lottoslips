@@ -3,6 +3,7 @@ export type MarketId =
   | 'over_1_5'
   | 'under_4_5'
   | 'double_chance'
+  | 'mixed'
 
 export type LegResult = 'pending' | 'won' | 'lost' | 'void'
 
