@@ -23,6 +23,11 @@ export function settleFromScore(leg: Leg, homeGoals: number, awayGoals: number):
       if (side === 'X2') return awayGoals >= homeGoals ? 'won' : 'lost'
       return homeGoals !== awayGoals ? 'won' : 'lost'
     }
+    case 'straight_win': {
+      const side = leg.winSide ?? 'home'
+      if (side === 'home') return homeGoals > awayGoals ? 'won' : 'lost'
+      return awayGoals > homeGoals ? 'won' : 'lost'
+    }
     default:
       return 'pending'
   }

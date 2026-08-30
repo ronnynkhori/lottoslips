@@ -26,6 +26,7 @@ function toLeg(draft: CardLegDraft): Leg {
     odds: Number(draft.odds) > 1 ? Number(draft.odds) : oddsFromProb(draft.probability),
     settleKind: draft.settleKind,
     scoringSide: draft.scoringSide,
+    winSide: draft.winSide,
     dcSide: draft.dcSide,
     result: 'pending',
   }
