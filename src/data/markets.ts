@@ -1,7 +1,7 @@
 import type { MarketId, MarketMeta } from '../types'
 
 /** Bump when the fixture card schema/markets change; card JSON has its own version */
-export const CARD_VERSION = 13
+export const CARD_VERSION = 14
 
 export const MARKETS: Record<MarketId, MarketMeta> = {
   team_to_score: {
@@ -30,13 +30,13 @@ export const MARKETS: Record<MarketId, MarketMeta> = {
   },
   straight_win: {
     id: 'straight_win',
-    label: 'Straight Win',
+    label: 'Straight Win 80+',
     shortLabel: 'SW',
     color: '#f472b6',
   },
   mixed: {
     id: 'mixed',
-    label: 'Mixed 85+',
+    label: 'Mixed Quality',
     shortLabel: 'MIX',
     color: '#c084fc',
   },

@@ -18,10 +18,17 @@ function formatKickoff(iso: string) {
 const COMP_ORDER = [
   'Premier League',
   'La Liga',
+  'Bundesliga',
+  'Serie A',
+  'Ligue 1',
   'EFL Cup',
   'FA Cup',
   'UCL',
   'Saudi Pro League',
+  'Scotland',
+  'Portugal',
+  'Turkey',
+  'Egypt',
 ]
 
 function groupLegsByCompetition(legs: Leg[]): { competition: string; legs: Leg[] }[] {
@@ -65,14 +72,19 @@ export function SlipPanel({ slip, onSetResult }: Props) {
   const meta = MARKETS[slip.marketId]
   const summary = slipLegSummary(slip)
   const estReturn = potentialReturn(slip)
-  const sortByProb = slip.marketId === 'straight_win'
+  const sortByProb =
+    slip.marketId === 'straight_win' || slip.marketId === 'mixed'
   const groups = useMemo(() => {
     if (sortByProb) {
       const sorted = [...slip.legs].sort((a, b) => b.probability - a.probability)
-      return [{ competition: 'By probability (80%+)', legs: sorted }]
+      const label =
+        slip.marketId === 'straight_win'
+          ? '1X2 favourites (80%+)'
+          : 'Quality mix · 1X2 + DC (85%+)'
+      return [{ competition: label, legs: sorted }]
     }
     return groupLegsByCompetition(slip.legs)
-  }, [slip.legs, sortByProb])
+  }, [slip.legs, sortByProb, slip.marketId])
 
   return (
     <div>
@@ -143,7 +155,17 @@ function LegRow({
         </div>
         <div className="leg-sub">
           <span style={{ color: accent }}>{leg.selection}</span>
-          {showCompetition && <span>{leg.competition}</span>}
+          {showCompetition && (
+            <span>
+              {leg.settleKind === 'double_chance'
+                ? 'Double Chance'
+                : leg.settleKind === 'straight_win'
+                  ? '1X2'
+                  : leg.competition}
+              {(leg.settleKind === 'straight_win' || leg.settleKind === 'double_chance') &&
+                ` · ${leg.competition}`}
+            </span>
+          )}
           <span>{formatKickoff(leg.kickoff)}</span>
           <span>{leg.probability}%</span>
           <span className="leg-odds">@{leg.odds?.toFixed(2) ?? '—'}</span>

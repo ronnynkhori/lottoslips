@@ -202,8 +202,9 @@ export default function App() {
               Lotto<span>Slips</span>
             </h1>
             <p>
-              Weekly card from JSON · real odds on every leg · FT scores settle TTS / O1.5 / U4.5 /
-              DC / SW. Mixed 85+ still manual-friendly. Skip TTS if no Over 0.5 market.
+              Weekly card aimed at quality multibets: short-priced 1X2 favourites + DC across
+              many leagues. FT scores settle TTS / O1.5 / U4.5 / DC / SW. Skip TTS if no Over 0.5
+              market.
             </p>
           </div>
           <div className="hero-actions">
