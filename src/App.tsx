@@ -1,15 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
-import { MARKETS, MARKET_ORDER, createWeekBundle } from './data/seedSlips'
+import { CARD_VERSION, MARKETS, MARKET_ORDER, createWeekBundle } from './data/seedSlips'
 import { SlipPanel } from './components/SlipPanel'
 import { RankingsPanel } from './components/RankingsPanel'
 import { RebetPanel } from './components/RebetPanel'
+import { ResultsBoard } from './components/ResultsBoard'
 import { buildRebetSlip, getRebetSuggestions } from './lib/rebet'
 import { bestMarket, computeMarketStats } from './lib/stats'
 import {
   addSlipToWeek,
   ensureActiveWeek,
   getActiveWeek,
+  hardResetState,
   loadState,
+  replaceActiveWeek,
   saveState,
   updateSlipInState,
 } from './lib/storage'
@@ -20,10 +23,17 @@ export default function App() {
   const [state, setState] = useState<AppState>(() => ensureActiveWeek(loadState()))
   const [activeMarket, setActiveMarket] = useState<MarketId>('team_to_score')
   const [dismissedRebets, setDismissedRebets] = useState<string[]>([])
+  const [flash, setFlash] = useState<string | null>(null)
 
   useEffect(() => {
     saveState(state)
   }, [state])
+
+  useEffect(() => {
+    if (!flash) return
+    const t = window.setTimeout(() => setFlash(null), 2500)
+    return () => window.clearTimeout(t)
+  }, [flash])
 
   const week = getActiveWeek(state)
   const slips = week?.slips ?? []
@@ -72,29 +82,30 @@ export default function App() {
     const rebet = buildRebetSlip(original, suggestion.remainingLegs, suggestion.suggestedStake)
     setState((prev) => addSlipToWeek(prev, week.weekKey, rebet))
     setActiveMarket(original.marketId)
+    setFlash(`Rebet created for ${MARKETS[original.marketId].shortLabel}`)
   }
 
   function newWeek() {
     const weekBundle = createWeekBundle(state.defaultStake)
-    // Avoid clobbering same week key — bump label with timestamp if needed
-    const exists = state.weeks.some((w) => w.weekKey === weekBundle.weekKey)
-    const key = exists ? `${weekBundle.weekKey}-${Date.now()}` : weekBundle.weekKey
+    const key = `${weekBundle.weekKey}-${Date.now()}`
     const next = {
       ...weekBundle,
       weekKey: key,
-      label: exists ? `${weekBundle.label} (new)` : weekBundle.label,
-      slips: weekBundle.slips.map((s) => ({ ...s, weekKey: key })),
+      label: `${weekBundle.label} (new)`,
+      slips: weekBundle.slips.map((s) => ({ ...s, weekKey: key, stake: state.defaultStake })),
     }
     setState((prev) => ({
       ...prev,
       weeks: [next, ...prev.weeks],
       activeWeekKey: key,
+      cardVersion: CARD_VERSION,
     }))
     setDismissedRebets([])
     setActiveMarket('team_to_score')
+    setFlash('New week loaded with latest fixture card')
   }
 
-  function resetDemoResults() {
+  function clearResultsOnly() {
     if (!week) return
     setState((prev) => ({
       ...prev,
@@ -111,6 +122,22 @@ export default function App() {
       }),
     }))
     setDismissedRebets([])
+    setFlash('All W/L/V marks cleared on this week')
+  }
+
+  function reloadFixtures() {
+    setState((prev) => replaceActiveWeek(prev))
+    setDismissedRebets([])
+    setActiveMarket('team_to_score')
+    setFlash('Fixtures reloaded · Aug 31–Sep 6 card')
+  }
+
+  function fullReset() {
+    const next = hardResetState(state.defaultStake)
+    setState(next)
+    setDismissedRebets([])
+    setActiveMarket('team_to_score')
+    setFlash('Full reset · fresh slips + empty results')
   }
 
   return (
@@ -122,9 +149,9 @@ export default function App() {
               Lotto<span>Slips</span>
             </h1>
             <p>
-              Always builds the four 20-folds — Team to Score (Over 0.5), match Over 1.5, Under
-              4.5, Double Chance — tracks results, suggests rebets after early losses, and ranks
-              the best market. Skip any TTS leg if the book has no team Over 0.5 market.
+              Four 20-folds (TTS Over 0.5, O1.5, U4.5, DC), grouped by league. Mark W/L/V to
+              self-check — results show in the side panel. Skip TTS legs with no team Over 0.5
+              market.
             </p>
           </div>
           <div className="hero-actions">
@@ -156,14 +183,21 @@ export default function App() {
                 </option>
               ))}
             </select>
-            <button type="button" className="btn btn-primary" onClick={newWeek}>
-              New week · 4 slips
+            <button type="button" className="btn btn-primary" onClick={reloadFixtures}>
+              Reload fixtures
             </button>
-            <button type="button" className="btn btn-ghost" onClick={resetDemoResults}>
-              Reset results
+            <button type="button" className="btn" onClick={newWeek}>
+              New week
+            </button>
+            <button type="button" className="btn btn-ghost" onClick={clearResultsOnly}>
+              Clear results
+            </button>
+            <button type="button" className="btn btn-danger" onClick={fullReset}>
+              Full reset
             </button>
           </div>
         </div>
+        {flash && <div className="flash-banner">{flash}</div>}
       </header>
 
       <div className="layout">
@@ -171,7 +205,7 @@ export default function App() {
           <div className="panel-head">
             <h2>{week?.label ?? 'Active week'}</h2>
             <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>
-              {primarySlips.length}/4 core slips
+              {primarySlips.length}/4 core slips · card v{CARD_VERSION}
             </span>
           </div>
           <div className="panel-body">
@@ -179,6 +213,8 @@ export default function App() {
               {MARKET_ORDER.map((id) => {
                 const meta = MARKETS[id]
                 const slip = slips.find((s) => s.marketId === id && !s.rebetOf)
+                const won = slip?.legs.filter((l) => l.result === 'won').length ?? 0
+                const lost = slip?.legs.filter((l) => l.result === 'lost').length ?? 0
                 return (
                   <button
                     key={id}
@@ -188,11 +224,20 @@ export default function App() {
                     onClick={() => setActiveMarket(id)}
                   >
                     <strong>{meta.shortLabel}</strong>
-                    <small>{slip ? `${slip.legs.length} legs` : '—'}</small>
+                    <small>
+                      {slip ? `${slip.legs.length} legs` : '—'}
+                      {won + lost > 0 ? ` · ${won}W/${lost}L` : ''}
+                    </small>
                   </button>
                 )
               })}
             </div>
+
+            <p className="check-hint">
+              Self-check: after each kickoff, mark the leg <strong>W</strong> (hit),{' '}
+              <strong>L</strong> (miss), or <strong>V</strong> (skip/no market). Open{' '}
+              <em>Self-check results</em> on the right to review.
+            </p>
 
             {activeSlip ? (
               <>
@@ -219,12 +264,13 @@ export default function App() {
                 ))}
               </>
             ) : (
-              <p className="empty">No slip for this market. Create a new week.</p>
+              <p className="empty">No slip for this market. Click Reload fixtures.</p>
             )}
           </div>
         </section>
 
         <aside className="side-stack">
+          <ResultsBoard slips={slips} onJumpMarket={setActiveMarket} />
           <RebetPanel
             suggestions={suggestions}
             onAccept={acceptRebet}
@@ -235,8 +281,9 @@ export default function App() {
       </div>
 
       <p className="footer-note">
-        Data stays in your browser (localStorage). Seed card is the Aug 25–30 2026 lotto set —
-        generate a new week anytime to refresh the four slips. Not betting advice.
+        Card v{CARD_VERSION}: Aug 31–Sep 6 (+ early MD4). Data in localStorage. Use{' '}
+        <strong>Reload fixtures</strong> if slips look stale, <strong>Full reset</strong> to wipe
+        everything. Not betting advice.
       </p>
     </div>
   )

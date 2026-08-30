@@ -514,6 +514,123 @@ a {
   font-size: 0.8rem;
 }
 
+.flash-banner {
+  margin-top: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  background: rgba(31, 169, 122, 0.16);
+  border: 1px solid rgba(31, 169, 122, 0.35);
+  color: #b7f5d7;
+  font-size: 0.9rem;
+}
+
+.check-hint {
+  margin: 0 0 0.9rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 12px;
+  background: rgba(232, 163, 23, 0.08);
+  border: 1px solid rgba(232, 163, 23, 0.22);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.results-board {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.results-market {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.results-market-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.65rem;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--muted);
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.8rem;
+}
+
+.results-market-head span:first-child {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.results-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.55rem;
+  align-items: start;
+  padding: 0.45rem 0.55rem;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--line);
+}
+
+.results-row.ok {
+  border-color: rgba(45, 202, 140, 0.35);
+}
+
+.results-row.dead {
+  border-color: rgba(255, 107, 90, 0.35);
+}
+
+.results-mark {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--bg2);
+}
+
+.results-row.ok .results-mark {
+  background: var(--ok);
+  color: #04140e;
+}
+
+.results-row.dead .results-mark {
+  background: var(--danger);
+  color: #1a0503;
+}
+
+.results-body {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.results-body strong {
+  font-size: 0.86rem;
+}
+
+.results-body small {
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
 @media (max-width: 720px) {
   .market-tabs {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -1,5 +1,8 @@
 import type { MarketMeta, MarketId, Slip, WeekBundle } from '../types'
 
+/** Bump when the fixture card changes so clients auto-refresh */
+export const CARD_VERSION = 7
+
 export const MARKETS: Record<MarketId, MarketMeta> = {
   team_to_score: {
     id: 'team_to_score',
@@ -57,11 +60,10 @@ function leg(
   }
 }
 
-/** Seed the four 20-folds from the Aug 25–30 2026 card */
+/** Current card: Mon 31 Aug → Sun 6 Sep 2026 */
 export function createFourSlips(weekKey: string, stake: number): Slip[] {
   const createdAt = new Date().toISOString()
 
-  // Team to Score = Over 0.5 for that side (score ≥1). Skip fixtures with no TTS market.
   const teamToScore: Slip = {
     id: crypto.randomUUID(),
     marketId: 'team_to_score',
@@ -72,26 +74,26 @@ export function createFourSlips(weekKey: string, stake: number): Slip[] {
     stake,
     status: 'open',
     legs: [
-      leg('2026-08-27T18:30:00Z', 'Chelsea', 'Luton', 'EFL Cup', 'Chelsea to score', 93),
-      leg('2026-08-26T18:45:00Z', 'Tottenham', 'Charlton', 'EFL Cup', 'Tottenham to score', 92),
-      leg('2026-08-25T16:00:00Z', 'Al-Ettifaq', 'Al-Nassr', 'Saudi Pro League', 'Al-Nassr to score', 91),
-      leg('2026-08-27T19:00:00Z', 'Barcelona', 'Athletic', 'La Liga', 'Barcelona to score', 90),
-      leg('2026-08-26T19:00:00Z', 'Real Madrid', 'Real Sociedad', 'La Liga', 'Real Madrid to score', 90),
-      leg('2026-08-25T19:00:00Z', 'Bodø/Glimt', 'NEC', 'UCL Play-offs', 'Bodø/Glimt to score', 90),
-      leg('2026-08-27T19:00:00Z', 'Fulham', 'AFC Wimbledon', 'EFL Cup', 'Fulham to score', 89),
-      leg('2026-08-25T19:00:00Z', 'LASK', 'Celtic', 'UCL Play-offs', 'Celtic to score', 88),
-      leg('2026-08-26T18:45:00Z', 'Newcastle', 'West Brom', 'EFL Cup', 'Newcastle to score', 87),
-      leg('2026-08-25T19:00:00Z', 'LASK', 'Celtic', 'UCL Play-offs', 'LASK to score', 86),
-      leg('2026-08-26T19:00:00Z', 'Lyon', 'Fenerbahçe', 'UCL Play-offs', 'Lyon to score', 85),
-      leg('2026-08-26T19:00:00Z', 'AEK Athens', 'Levski', 'UCL Play-offs', 'AEK Athens to score', 84),
-      leg('2026-08-25T18:45:00Z', 'Sheff Wed', 'Wolves', 'EFL Cup', 'Wolves to score', 83),
-      leg('2026-08-26T18:45:00Z', 'Bradford', 'Burnley', 'EFL Cup', 'Burnley to score', 82),
-      leg('2026-08-25T16:45:00Z', 'Sabah', 'Hapoel Beer-Sheva', 'UCL Play-offs', 'Hapoel to score', 82),
-      leg('2026-08-25T18:30:00Z', 'Doncaster', 'Middlesbrough', 'EFL Cup', 'Middlesbrough to score', 80),
-      leg('2026-08-26T19:00:00Z', 'Preston', 'Everton', 'EFL Cup', 'Everton to score', 80),
-      leg('2026-08-25T19:00:00Z', 'Nott’m Forest', 'Leeds', 'EFL Cup', 'Nott’m Forest to score', 77),
-      leg('2026-08-25T19:00:00Z', 'Valencia', 'Real Betis', 'La Liga', 'Real Betis to score', 76),
-      leg('2026-08-26T19:00:00Z', 'Lyon', 'Fenerbahçe', 'UCL Play-offs', 'Fenerbahçe to score', 75),
+      leg('2026-08-31T18:30:00Z', 'Barcelona', 'Rayo Vallecano', 'La Liga', 'Barcelona to score', 93),
+      leg('2026-09-05T14:00:00Z', 'Man City', 'Coventry', 'Premier League', 'Man City to score', 93),
+      leg('2026-09-04T19:00:00Z', 'Ipswich', 'Liverpool', 'Premier League', 'Liverpool to score', 91),
+      leg('2026-09-04T19:00:00Z', 'Real Betis', 'Real Madrid', 'La Liga', 'Real Madrid to score', 90),
+      leg('2026-09-06T14:15:00Z', 'Valencia', 'Barcelona', 'La Liga', 'Barcelona to score', 90),
+      leg('2026-08-31T19:00:00Z', 'Aston Villa', 'Arsenal', 'Premier League', 'Arsenal to score', 88),
+      leg('2026-09-06T13:00:00Z', 'Everton', 'Man United', 'Premier League', 'Man United to score', 87),
+      leg('2026-09-05T14:00:00Z', 'Nott’m Forest', 'Tottenham', 'Premier League', 'Tottenham to score', 86),
+      leg('2026-09-06T15:30:00Z', 'Arsenal', 'Chelsea', 'Premier League', 'Arsenal to score', 86),
+      leg('2026-09-05T11:30:00Z', 'Newcastle', 'Bournemouth', 'Premier League', 'Newcastle to score', 85),
+      leg('2026-09-06T15:30:00Z', 'Arsenal', 'Chelsea', 'Premier League', 'Chelsea to score', 84),
+      leg('2026-09-05T14:00:00Z', 'Brighton', 'Leeds', 'Premier League', 'Brighton to score', 84),
+      leg('2026-09-05T14:00:00Z', 'Fulham', 'Crystal Palace', 'Premier League', 'Fulham to score', 83),
+      leg('2026-08-31T19:00:00Z', 'Aston Villa', 'Arsenal', 'Premier League', 'Aston Villa to score', 82),
+      leg('2026-09-05T16:30:00Z', 'Hull', 'Aston Villa', 'Premier League', 'Aston Villa to score', 82),
+      leg('2026-09-04T19:00:00Z', 'Real Betis', 'Real Madrid', 'La Liga', 'Real Betis to score', 81),
+      leg('2026-09-05T14:00:00Z', 'Brentford', 'Sunderland', 'Premier League', 'Brentford to score', 80),
+      leg('2026-08-31T16:30:00Z', 'Osasuna', 'Getafe', 'La Liga', 'Osasuna to score', 79),
+      leg('2026-09-05T14:00:00Z', 'Nott’m Forest', 'Tottenham', 'Premier League', 'Nott’m Forest to score', 78),
+      leg('2026-09-06T13:00:00Z', 'Everton', 'Man United', 'Premier League', 'Everton to score', 77),
     ],
   }
 
@@ -105,26 +107,26 @@ export function createFourSlips(weekKey: string, stake: number): Slip[] {
     stake,
     status: 'open',
     legs: [
-      leg('2026-08-25T16:00:00Z', 'Al-Ettifaq', 'Al-Nassr', 'Saudi Pro League', 'Over 1.5', 93),
-      leg('2026-08-26T18:45:00Z', 'Tottenham', 'Charlton', 'EFL Cup', 'Over 1.5', 92),
-      leg('2026-08-27T18:30:00Z', 'Chelsea', 'Luton', 'EFL Cup', 'Over 1.5', 91),
-      leg('2026-08-30T15:00:00Z', 'Real Madrid', 'Málaga', 'La Liga', 'Over 1.5', 91),
-      leg('2026-08-27T19:00:00Z', 'Fulham', 'AFC Wimbledon', 'EFL Cup', 'Over 1.5', 89),
-      leg('2026-08-25T19:00:00Z', 'Bodø/Glimt', 'NEC', 'UCL Play-offs', 'Over 1.5', 88),
-      leg('2026-08-28T19:00:00Z', 'Crystal Palace', 'Man City', 'Premier League', 'Over 1.5', 88),
-      leg('2026-08-30T15:30:00Z', 'Man United', 'Ipswich', 'Premier League', 'Over 1.5', 87),
-      leg('2026-08-26T19:00:00Z', 'Real Madrid', 'Real Sociedad', 'La Liga', 'Over 1.5', 86),
-      leg('2026-08-29T11:30:00Z', 'Liverpool', 'Nott’m Forest', 'Premier League', 'Over 1.5', 86),
-      leg('2026-08-26T19:00:00Z', 'Lyon', 'Fenerbahçe', 'UCL Play-offs', 'Over 1.5', 85),
-      leg('2026-08-26T18:45:00Z', 'Newcastle', 'West Brom', 'EFL Cup', 'Over 1.5', 85),
-      leg('2026-08-29T16:30:00Z', 'Tottenham', 'Newcastle', 'Premier League', 'Over 1.5', 84),
-      leg('2026-08-25T18:45:00Z', 'Sheff Wed', 'Wolves', 'EFL Cup', 'Over 1.5', 83),
-      leg('2026-08-26T19:00:00Z', 'Preston', 'Everton', 'EFL Cup', 'Over 1.5', 83),
-      leg('2026-08-27T19:00:00Z', 'Barcelona', 'Athletic', 'La Liga', 'Over 1.5', 83),
-      leg('2026-08-25T18:45:00Z', 'Southampton', 'West Ham', 'EFL Cup', 'Over 1.5', 82),
-      leg('2026-08-26T18:45:00Z', 'Bradford', 'Burnley', 'EFL Cup', 'Over 1.5', 82),
-      leg('2026-08-25T16:45:00Z', 'Sabah', 'Hapoel Beer-Sheva', 'UCL Play-offs', 'Over 1.5', 82),
-      leg('2026-08-25T19:00:00Z', 'LASK', 'Celtic', 'UCL Play-offs', 'Over 1.5', 81),
+      leg('2026-09-05T14:00:00Z', 'Man City', 'Coventry', 'Premier League', 'Over 1.5', 92),
+      leg('2026-08-31T18:30:00Z', 'Barcelona', 'Rayo Vallecano', 'La Liga', 'Over 1.5', 91),
+      leg('2026-09-06T15:30:00Z', 'Arsenal', 'Chelsea', 'Premier League', 'Over 1.5', 90),
+      leg('2026-09-04T19:00:00Z', 'Ipswich', 'Liverpool', 'Premier League', 'Over 1.5', 89),
+      leg('2026-09-04T19:00:00Z', 'Real Betis', 'Real Madrid', 'La Liga', 'Over 1.5', 88),
+      leg('2026-09-06T14:15:00Z', 'Valencia', 'Barcelona', 'La Liga', 'Over 1.5', 88),
+      leg('2026-08-31T19:00:00Z', 'Aston Villa', 'Arsenal', 'Premier League', 'Over 1.5', 87),
+      leg('2026-09-06T13:00:00Z', 'Everton', 'Man United', 'Premier League', 'Over 1.5', 86),
+      leg('2026-09-05T14:00:00Z', 'Nott’m Forest', 'Tottenham', 'Premier League', 'Over 1.5', 86),
+      leg('2026-09-05T11:30:00Z', 'Newcastle', 'Bournemouth', 'Premier League', 'Over 1.5', 85),
+      leg('2026-09-05T14:00:00Z', 'Brighton', 'Leeds', 'Premier League', 'Over 1.5', 85),
+      leg('2026-09-05T16:30:00Z', 'Hull', 'Aston Villa', 'Premier League', 'Over 1.5', 84),
+      leg('2026-09-05T14:00:00Z', 'Fulham', 'Crystal Palace', 'Premier League', 'Over 1.5', 84),
+      leg('2026-09-05T14:00:00Z', 'Brentford', 'Sunderland', 'Premier League', 'Over 1.5', 83),
+      leg('2026-08-31T16:30:00Z', 'Osasuna', 'Getafe', 'La Liga', 'Over 1.5', 82),
+      leg('2026-09-12T14:00:00Z', 'Liverpool', 'Fulham', 'Premier League', 'Over 1.5', 86),
+      leg('2026-09-12T16:30:00Z', 'Tottenham', 'Everton', 'Premier League', 'Over 1.5', 85),
+      leg('2026-09-13T15:30:00Z', 'Man United', 'Man City', 'Premier League', 'Over 1.5', 90),
+      leg('2026-09-12T14:00:00Z', 'Chelsea', 'Hull', 'Premier League', 'Over 1.5', 88),
+      leg('2026-09-12T19:00:00Z', 'Sunderland', 'Arsenal', 'Premier League', 'Over 1.5', 84),
     ],
   }
 
@@ -138,26 +140,26 @@ export function createFourSlips(weekKey: string, stake: number): Slip[] {
     stake,
     status: 'open',
     legs: [
-      leg('2026-08-25T19:00:00Z', 'Nott’m Forest', 'Leeds', 'EFL Cup', 'Under 4.5', 92),
-      leg('2026-08-25T19:00:00Z', 'Valencia', 'Real Betis', 'La Liga', 'Under 4.5', 91),
-      leg('2026-08-26T19:00:00Z', 'AEK Athens', 'Levski', 'UCL Play-offs', 'Under 4.5', 91),
-      leg('2026-08-25T18:30:00Z', 'Doncaster', 'Middlesbrough', 'EFL Cup', 'Under 4.5', 90),
-      leg('2026-08-25T18:45:00Z', 'Cambridge', 'Millwall', 'EFL Cup', 'Under 4.5', 90),
-      leg('2026-08-30T13:00:00Z', 'Sunderland', 'Fulham', 'Premier League', 'Under 4.5', 89),
-      leg('2026-08-26T19:00:00Z', 'Lyon', 'Fenerbahçe', 'UCL Play-offs', 'Under 4.5', 89),
-      leg('2026-08-29T17:00:00Z', 'Real Sociedad', 'Espanyol', 'La Liga', 'Under 4.5', 89),
-      leg('2026-08-25T18:45:00Z', 'Blackburn', 'Sheff Utd', 'EFL Cup', 'Under 4.5', 88),
-      leg('2026-08-26T19:00:00Z', 'Viking', 'Dinamo Zagreb', 'UCL Play-offs', 'Under 4.5', 88),
-      leg('2026-08-30T13:00:00Z', 'Leeds', 'Brentford', 'Premier League', 'Under 4.5', 88),
-      leg('2026-08-26T19:00:00Z', 'Real Madrid', 'Real Sociedad', 'La Liga', 'Under 4.5', 88),
-      leg('2026-08-25T18:00:00Z', 'Cardiff', 'Norwich', 'EFL Cup', 'Under 4.5', 87),
-      leg('2026-08-29T19:30:00Z', 'Sevilla', 'Atlético Madrid', 'La Liga', 'Under 4.5', 87),
-      leg('2026-08-29T14:00:00Z', 'Bournemouth', 'Everton', 'Premier League', 'Under 4.5', 87),
-      leg('2026-08-26T18:45:00Z', 'Newcastle', 'West Brom', 'EFL Cup', 'Under 4.5', 86),
-      leg('2026-08-26T19:00:00Z', 'Celje', 'Slovan Bratislava', 'UCL Play-offs', 'Under 4.5', 86),
-      leg('2026-08-30T13:00:00Z', 'Chelsea', 'Brighton', 'Premier League', 'Under 4.5', 86),
-      leg('2026-08-29T16:30:00Z', 'Tottenham', 'Newcastle', 'Premier League', 'Under 4.5', 85),
-      leg('2026-08-26T19:00:00Z', 'Preston', 'Everton', 'EFL Cup', 'Under 4.5', 85),
+      leg('2026-08-31T16:30:00Z', 'Osasuna', 'Getafe', 'La Liga', 'Under 4.5', 92),
+      leg('2026-09-05T14:00:00Z', 'Fulham', 'Crystal Palace', 'Premier League', 'Under 4.5', 90),
+      leg('2026-09-05T14:00:00Z', 'Brentford', 'Sunderland', 'Premier League', 'Under 4.5', 89),
+      leg('2026-09-05T11:30:00Z', 'Newcastle', 'Bournemouth', 'Premier League', 'Under 4.5', 88),
+      leg('2026-09-06T13:00:00Z', 'Everton', 'Man United', 'Premier League', 'Under 4.5', 87),
+      leg('2026-08-31T19:00:00Z', 'Aston Villa', 'Arsenal', 'Premier League', 'Under 4.5', 87),
+      leg('2026-09-05T14:00:00Z', 'Brighton', 'Leeds', 'Premier League', 'Under 4.5', 86),
+      leg('2026-09-05T14:00:00Z', 'Nott’m Forest', 'Tottenham', 'Premier League', 'Under 4.5', 86),
+      leg('2026-09-05T16:30:00Z', 'Hull', 'Aston Villa', 'Premier League', 'Under 4.5', 86),
+      leg('2026-09-04T19:00:00Z', 'Real Betis', 'Real Madrid', 'La Liga', 'Under 4.5', 85),
+      leg('2026-09-06T14:15:00Z', 'Valencia', 'Barcelona', 'La Liga', 'Under 4.5', 84),
+      leg('2026-09-06T15:30:00Z', 'Arsenal', 'Chelsea', 'Premier League', 'Under 4.5', 84),
+      leg('2026-09-12T14:00:00Z', 'AFC Bournemouth', 'Brentford', 'Premier League', 'Under 4.5', 88),
+      leg('2026-09-12T14:00:00Z', 'Crystal Palace', 'Ipswich', 'Premier League', 'Under 4.5', 88),
+      leg('2026-09-12T14:00:00Z', 'Aston Villa', 'Nott’m Forest', 'Premier League', 'Under 4.5', 87),
+      leg('2026-09-12T16:30:00Z', 'Tottenham', 'Everton', 'Premier League', 'Under 4.5', 86),
+      leg('2026-09-12T14:00:00Z', 'Liverpool', 'Fulham', 'Premier League', 'Under 4.5', 85),
+      leg('2026-09-13T13:00:00Z', 'Coventry', 'Brighton', 'Premier League', 'Under 4.5', 87),
+      leg('2026-09-14T19:00:00Z', 'Leeds', 'Newcastle', 'Premier League', 'Under 4.5', 86),
+      leg('2026-09-12T19:00:00Z', 'Sunderland', 'Arsenal', 'Premier League', 'Under 4.5', 85),
     ],
   }
 
@@ -171,26 +173,26 @@ export function createFourSlips(weekKey: string, stake: number): Slip[] {
     stake,
     status: 'open',
     legs: [
-      leg('2026-08-26T18:45:00Z', 'Tottenham', 'Charlton', 'EFL Cup', 'Tottenham 1X', 96, { dcSide: '1X' }),
-      leg('2026-08-27T18:30:00Z', 'Chelsea', 'Luton', 'EFL Cup', 'Chelsea 1X', 95, { dcSide: '1X' }),
-      leg('2026-08-30T15:00:00Z', 'Real Madrid', 'Málaga', 'La Liga', 'Real Madrid 1X', 95, { dcSide: '1X' }),
-      leg('2026-08-27T19:00:00Z', 'Fulham', 'AFC Wimbledon', 'EFL Cup', 'Fulham 1X', 94, { dcSide: '1X' }),
-      leg('2026-08-30T15:30:00Z', 'Man United', 'Ipswich', 'Premier League', 'Man United 1X', 92, { dcSide: '1X' }),
-      leg('2026-08-25T19:00:00Z', 'Bodø/Glimt', 'NEC', 'UCL Play-offs', 'Bodø/Glimt 1X', 91, { dcSide: '1X' }),
-      leg('2026-08-25T16:00:00Z', 'Al-Ettifaq', 'Al-Nassr', 'Saudi Pro League', 'Al-Nassr X2', 90, { dcSide: 'X2' }),
-      leg('2026-08-27T19:00:00Z', 'Barcelona', 'Athletic', 'La Liga', 'Barcelona 1X', 90, { dcSide: '1X' }),
-      leg('2026-08-29T11:30:00Z', 'Liverpool', 'Nott’m Forest', 'Premier League', 'Liverpool 1X', 89, { dcSide: '1X' }),
-      leg('2026-08-28T19:00:00Z', 'Crystal Palace', 'Man City', 'Premier League', 'Man City X2', 88, { dcSide: 'X2' }),
-      leg('2026-08-26T18:45:00Z', 'Newcastle', 'West Brom', 'EFL Cup', 'Newcastle 1X', 88, { dcSide: '1X' }),
-      leg('2026-08-26T19:00:00Z', 'Real Madrid', 'Real Sociedad', 'La Liga', 'Real Madrid 1X', 87, { dcSide: '1X' }),
-      leg('2026-08-26T19:00:00Z', 'AEK Athens', 'Levski', 'UCL Play-offs', 'AEK Athens 1X', 87, { dcSide: '1X' }),
-      leg('2026-08-26T18:45:00Z', 'Bradford', 'Burnley', 'EFL Cup', 'Burnley X2', 86, { dcSide: 'X2' }),
-      leg('2026-08-26T19:00:00Z', 'Lyon', 'Fenerbahçe', 'UCL Play-offs', 'Lyon 1X', 85, { dcSide: '1X' }),
-      leg('2026-08-25T18:45:00Z', 'Sheff Wed', 'Wolves', 'EFL Cup', 'Wolves X2', 84, { dcSide: 'X2' }),
-      leg('2026-08-25T19:00:00Z', 'LASK', 'Celtic', 'UCL Play-offs', 'Celtic X2', 83, { dcSide: 'X2' }),
-      leg('2026-08-26T19:00:00Z', 'Preston', 'Everton', 'EFL Cup', 'Everton X2', 83, { dcSide: 'X2' }),
-      leg('2026-08-29T16:30:00Z', 'Tottenham', 'Newcastle', 'Premier League', 'Tottenham 1X', 82, { dcSide: '1X' }),
-      leg('2026-08-25T19:00:00Z', 'Birmingham', 'Brentford', 'EFL Cup', 'Brentford X2', 81, { dcSide: 'X2' }),
+      leg('2026-09-05T14:00:00Z', 'Man City', 'Coventry', 'Premier League', 'Man City 1X', 96, { dcSide: '1X' }),
+      leg('2026-08-31T18:30:00Z', 'Barcelona', 'Rayo Vallecano', 'La Liga', 'Barcelona 1X', 95, { dcSide: '1X' }),
+      leg('2026-09-04T19:00:00Z', 'Ipswich', 'Liverpool', 'Premier League', 'Liverpool X2', 93, { dcSide: 'X2' }),
+      leg('2026-09-04T19:00:00Z', 'Real Betis', 'Real Madrid', 'La Liga', 'Real Madrid X2', 92, { dcSide: 'X2' }),
+      leg('2026-09-06T14:15:00Z', 'Valencia', 'Barcelona', 'La Liga', 'Barcelona X2', 91, { dcSide: 'X2' }),
+      leg('2026-08-31T19:00:00Z', 'Aston Villa', 'Arsenal', 'Premier League', 'Arsenal X2', 88, { dcSide: 'X2' }),
+      leg('2026-09-06T13:00:00Z', 'Everton', 'Man United', 'Premier League', 'Man United X2', 88, { dcSide: 'X2' }),
+      leg('2026-09-06T15:30:00Z', 'Arsenal', 'Chelsea', 'Premier League', 'Arsenal 1X', 87, { dcSide: '1X' }),
+      leg('2026-09-05T14:00:00Z', 'Nott’m Forest', 'Tottenham', 'Premier League', 'Tottenham X2', 86, { dcSide: 'X2' }),
+      leg('2026-09-05T11:30:00Z', 'Newcastle', 'Bournemouth', 'Premier League', 'Newcastle 1X', 88, { dcSide: '1X' }),
+      leg('2026-09-05T14:00:00Z', 'Brighton', 'Leeds', 'Premier League', 'Brighton 1X', 86, { dcSide: '1X' }),
+      leg('2026-09-05T16:30:00Z', 'Hull', 'Aston Villa', 'Premier League', 'Aston Villa X2', 85, { dcSide: 'X2' }),
+      leg('2026-09-05T14:00:00Z', 'Fulham', 'Crystal Palace', 'Premier League', 'Fulham 1X', 84, { dcSide: '1X' }),
+      leg('2026-09-12T14:00:00Z', 'Chelsea', 'Hull', 'Premier League', 'Chelsea 1X', 94, { dcSide: '1X' }),
+      leg('2026-09-12T14:00:00Z', 'Liverpool', 'Fulham', 'Premier League', 'Liverpool 1X', 91, { dcSide: '1X' }),
+      leg('2026-09-13T15:30:00Z', 'Man United', 'Man City', 'Premier League', 'Man City X2', 82, { dcSide: 'X2' }),
+      leg('2026-09-12T16:30:00Z', 'Tottenham', 'Everton', 'Premier League', 'Tottenham 1X', 87, { dcSide: '1X' }),
+      leg('2026-09-12T19:00:00Z', 'Sunderland', 'Arsenal', 'Premier League', 'Arsenal X2', 90, { dcSide: 'X2' }),
+      leg('2026-09-05T14:00:00Z', 'Brentford', 'Sunderland', 'Premier League', 'Brentford 1X', 83, { dcSide: '1X' }),
+      leg('2026-08-31T16:30:00Z', 'Osasuna', 'Getafe', 'La Liga', 'Osasuna 1X', 82, { dcSide: '1X' }),
     ],
   }
 
@@ -203,7 +205,6 @@ export function createFourSlips(weekKey: string, stake: number): Slip[] {
 }
 
 export function weekLabelFromKey(weekKey: string): string {
-  // weekKey format: 2026-W35
   return `Week ${weekKey.split('-W')[1] ?? weekKey}`
 }
 
@@ -220,8 +221,9 @@ export function createWeekBundle(stake = 1): WeekBundle {
   const weekKey = currentWeekKey()
   return {
     weekKey,
-    label: `${weekLabelFromKey(weekKey)} · Aug 25–30`,
+    label: `${weekLabelFromKey(weekKey)} · Aug 31–Sep 6`,
     createdAt: new Date().toISOString(),
+    cardVersion: CARD_VERSION,
     slips: createFourSlips(weekKey, stake),
   }
 }

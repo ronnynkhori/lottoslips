@@ -53,12 +53,15 @@ export interface WeekBundle {
   label: string
   slips: Slip[]
   createdAt: string
+  /** Fixture card version — stale weeks get replaced on load */
+  cardVersion?: number
 }
 
 export interface AppState {
   weeks: WeekBundle[]
   activeWeekKey: string
   defaultStake: number
+  cardVersion?: number
 }
 
 export interface MarketStats {
