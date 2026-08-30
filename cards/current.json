@@ -1,0 +1,1823 @@
+{
+  "cardVersion": 14,
+  "weekKey": "2026-W36",
+  "label": "Week 36 · quality multibet card",
+  "updatedAt": "2026-08-30T20:20:56.432Z",
+  "markets": {
+    "team_to_score": {
+      "title": "Underdog TTS · 30-fold",
+      "description": "Underdog team Over 0.5 only (e.g. Leeds to score vs Arsenal). Skip if no TTS market.",
+      "legs": [
+        {
+          "kickoff": "2026-09-04T19:00:00Z",
+          "home": "Real Betis",
+          "away": "Real Madrid",
+          "competition": "La Liga",
+          "selection": "Real Betis to score",
+          "probability": 84,
+          "odds": 1.21,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-06T15:30:00Z",
+          "home": "Arsenal",
+          "away": "Chelsea",
+          "competition": "Premier League",
+          "selection": "Chelsea to score",
+          "probability": 84,
+          "odds": 1.21,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Nott'm Forest",
+          "away": "Tottenham",
+          "competition": "Premier League",
+          "selection": "Nott'm Forest to score",
+          "probability": 83,
+          "odds": 1.23,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-06T13:00:00Z",
+          "home": "Everton",
+          "away": "Man United",
+          "competition": "Premier League",
+          "selection": "Everton to score",
+          "probability": 82,
+          "odds": 1.24,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Brighton",
+          "away": "Leeds",
+          "competition": "Premier League",
+          "selection": "Leeds to score",
+          "probability": 81,
+          "odds": 1.26,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-05T11:30:00Z",
+          "home": "Newcastle",
+          "away": "Bournemouth",
+          "competition": "Premier League",
+          "selection": "Bournemouth to score",
+          "probability": 81,
+          "odds": 1.26,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Fulham",
+          "away": "Crystal Palace",
+          "competition": "Premier League",
+          "selection": "Crystal Palace to score",
+          "probability": 80,
+          "odds": 1.27,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Brentford",
+          "away": "Sunderland",
+          "competition": "Premier League",
+          "selection": "Sunderland to score",
+          "probability": 79,
+          "odds": 1.29,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-08-31T19:00:00Z",
+          "home": "Aston Villa",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Aston Villa to score",
+          "probability": 82,
+          "odds": 1.24,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-05T16:30:00Z",
+          "home": "Hull",
+          "away": "Aston Villa",
+          "competition": "Premier League",
+          "selection": "Hull to score",
+          "probability": 78,
+          "odds": 1.31,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-06T14:15:00Z",
+          "home": "Valencia",
+          "away": "Barcelona",
+          "competition": "La Liga",
+          "selection": "Valencia to score",
+          "probability": 78,
+          "odds": 1.31,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-08-31T16:30:00Z",
+          "home": "Osasuna",
+          "away": "Getafe",
+          "competition": "La Liga",
+          "selection": "Getafe to score",
+          "probability": 77,
+          "odds": 1.32,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-04T19:00:00Z",
+          "home": "Ipswich",
+          "away": "Liverpool",
+          "competition": "Premier League",
+          "selection": "Ipswich to score",
+          "probability": 76,
+          "odds": 1.34,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-08-31T18:30:00Z",
+          "home": "Barcelona",
+          "away": "Rayo Vallecano",
+          "competition": "La Liga",
+          "selection": "Rayo Vallecano to score",
+          "probability": 75,
+          "odds": 1.36,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Man City",
+          "away": "Coventry",
+          "competition": "Premier League",
+          "selection": "Coventry to score",
+          "probability": 74,
+          "odds": 1.38,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Liverpool",
+          "away": "Fulham",
+          "competition": "Premier League",
+          "selection": "Fulham to score",
+          "probability": 80,
+          "odds": 1.27,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-12T16:30:00Z",
+          "home": "Tottenham",
+          "away": "Everton",
+          "competition": "Premier League",
+          "selection": "Everton to score",
+          "probability": 79,
+          "odds": 1.29,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-12T19:00:00Z",
+          "home": "Sunderland",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Sunderland to score",
+          "probability": 75,
+          "odds": 1.36,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Chelsea",
+          "away": "Hull",
+          "competition": "Premier League",
+          "selection": "Hull to score",
+          "probability": 74,
+          "odds": 1.38,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-13T15:30:00Z",
+          "home": "Man United",
+          "away": "Man City",
+          "competition": "Premier League",
+          "selection": "Man United to score",
+          "probability": 83,
+          "odds": 1.23,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-02T18:45:00Z",
+          "home": "Leicester",
+          "away": "Aston Villa",
+          "competition": "EFL Cup",
+          "selection": "Leicester to score",
+          "probability": 78,
+          "odds": 1.31,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-02T19:00:00Z",
+          "home": "Wolves",
+          "away": "Burnley",
+          "competition": "EFL Cup",
+          "selection": "Burnley to score",
+          "probability": 76,
+          "odds": 1.34,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-03T19:00:00Z",
+          "home": "Sheffield United",
+          "away": "Man City",
+          "competition": "EFL Cup",
+          "selection": "Sheffield United to score",
+          "probability": 72,
+          "odds": 1.42,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-01T19:00:00Z",
+          "home": "Al Hilal",
+          "away": "Al Nassr",
+          "competition": "Saudi Pro League",
+          "selection": "Al Nassr to score",
+          "probability": 84,
+          "odds": 1.21,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-02T16:00:00Z",
+          "home": "Al Ittihad",
+          "away": "Al Ahli",
+          "competition": "Saudi Pro League",
+          "selection": "Al Ahli to score",
+          "probability": 80,
+          "odds": 1.27,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-03T18:00:00Z",
+          "home": "Al Ettifaq",
+          "away": "Al Shabab",
+          "competition": "Saudi Pro League",
+          "selection": "Al Ettifaq to score",
+          "probability": 77,
+          "odds": 1.32,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-16T19:00:00Z",
+          "home": "PSV",
+          "away": "Liverpool",
+          "competition": "UCL",
+          "selection": "PSV to score",
+          "probability": 75,
+          "odds": 1.36,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Inter",
+          "away": "Ajax",
+          "competition": "UCL",
+          "selection": "Ajax to score",
+          "probability": 74,
+          "odds": 1.38,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        },
+        {
+          "kickoff": "2026-09-16T16:45:00Z",
+          "home": "Galatasaray",
+          "away": "Atletico Madrid",
+          "competition": "UCL",
+          "selection": "Galatasaray to score",
+          "probability": 78,
+          "odds": 1.31,
+          "settleKind": "team_to_score",
+          "scoringSide": "home"
+        },
+        {
+          "kickoff": "2026-09-18T19:00:00Z",
+          "home": "Wrexham",
+          "away": "Sheffield Wednesday",
+          "competition": "FA Cup",
+          "selection": "Sheffield Wednesday to score",
+          "probability": 76,
+          "odds": 1.34,
+          "settleKind": "team_to_score",
+          "scoringSide": "away"
+        }
+      ]
+    },
+    "over_1_5": {
+      "title": "Over 1.5 Goals · 30-fold",
+      "description": "2+ total goals in each match",
+      "legs": [
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Man City",
+          "away": "Coventry",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 92,
+          "odds": 1.05,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-08-31T18:30:00Z",
+          "home": "Barcelona",
+          "away": "Rayo Vallecano",
+          "competition": "La Liga",
+          "selection": "Over 1.5",
+          "probability": 91,
+          "odds": 1.05,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-06T15:30:00Z",
+          "home": "Arsenal",
+          "away": "Chelsea",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-04T19:00:00Z",
+          "home": "Ipswich",
+          "away": "Liverpool",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 89,
+          "odds": 1.07,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-04T19:00:00Z",
+          "home": "Real Betis",
+          "away": "Real Madrid",
+          "competition": "La Liga",
+          "selection": "Over 1.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-06T14:15:00Z",
+          "home": "Valencia",
+          "away": "Barcelona",
+          "competition": "La Liga",
+          "selection": "Over 1.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-08-31T19:00:00Z",
+          "home": "Aston Villa",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 87,
+          "odds": 1.09,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-06T13:00:00Z",
+          "home": "Everton",
+          "away": "Man United",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Nott'm Forest",
+          "away": "Tottenham",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-05T11:30:00Z",
+          "home": "Newcastle",
+          "away": "Bournemouth",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 85,
+          "odds": 1.12,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Brighton",
+          "away": "Leeds",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 85,
+          "odds": 1.12,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-05T16:30:00Z",
+          "home": "Hull",
+          "away": "Aston Villa",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 84,
+          "odds": 1.13,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Fulham",
+          "away": "Crystal Palace",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 84,
+          "odds": 1.13,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Brentford",
+          "away": "Sunderland",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 83,
+          "odds": 1.14,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-08-31T16:30:00Z",
+          "home": "Osasuna",
+          "away": "Getafe",
+          "competition": "La Liga",
+          "selection": "Over 1.5",
+          "probability": 82,
+          "odds": 1.16,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Liverpool",
+          "away": "Fulham",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-12T16:30:00Z",
+          "home": "Tottenham",
+          "away": "Everton",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 85,
+          "odds": 1.12,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-13T15:30:00Z",
+          "home": "Man United",
+          "away": "Man City",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Chelsea",
+          "away": "Hull",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-12T19:00:00Z",
+          "home": "Sunderland",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Over 1.5",
+          "probability": 84,
+          "odds": 1.13,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-02T18:45:00Z",
+          "home": "Leicester",
+          "away": "Aston Villa",
+          "competition": "EFL Cup",
+          "selection": "Over 1.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-03T19:00:00Z",
+          "home": "Sheffield United",
+          "away": "Man City",
+          "competition": "EFL Cup",
+          "selection": "Over 1.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-02T19:00:00Z",
+          "home": "Wolves",
+          "away": "Burnley",
+          "competition": "EFL Cup",
+          "selection": "Over 1.5",
+          "probability": 82,
+          "odds": 1.16,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-01T19:00:00Z",
+          "home": "Al Hilal",
+          "away": "Al Nassr",
+          "competition": "Saudi Pro League",
+          "selection": "Over 1.5",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-02T16:00:00Z",
+          "home": "Al Ittihad",
+          "away": "Al Ahli",
+          "competition": "Saudi Pro League",
+          "selection": "Over 1.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-16T19:00:00Z",
+          "home": "PSV",
+          "away": "Liverpool",
+          "competition": "UCL",
+          "selection": "Over 1.5",
+          "probability": 87,
+          "odds": 1.09,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Bayern Munich",
+          "away": "Dinamo Zagreb",
+          "competition": "UCL",
+          "selection": "Over 1.5",
+          "probability": 91,
+          "odds": 1.05,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-16T16:45:00Z",
+          "home": "Galatasaray",
+          "away": "Atletico Madrid",
+          "competition": "UCL",
+          "selection": "Over 1.5",
+          "probability": 84,
+          "odds": 1.13,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-18T19:00:00Z",
+          "home": "Wrexham",
+          "away": "Sheffield Wednesday",
+          "competition": "FA Cup",
+          "selection": "Over 1.5",
+          "probability": 83,
+          "odds": 1.14,
+          "settleKind": "over_1_5"
+        },
+        {
+          "kickoff": "2026-09-19T14:00:00Z",
+          "home": "Portsmouth",
+          "away": "West Brom",
+          "competition": "FA Cup",
+          "selection": "Over 1.5",
+          "probability": 82,
+          "odds": 1.16,
+          "settleKind": "over_1_5"
+        }
+      ]
+    },
+    "under_4_5": {
+      "title": "Under 4.5 Goals · 28-fold",
+      "description": "Fewer than 5 total goals",
+      "legs": [
+        {
+          "kickoff": "2026-08-31T16:30:00Z",
+          "home": "Osasuna",
+          "away": "Getafe",
+          "competition": "La Liga",
+          "selection": "Under 4.5",
+          "probability": 92,
+          "odds": 1.05,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Fulham",
+          "away": "Crystal Palace",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Brentford",
+          "away": "Sunderland",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 89,
+          "odds": 1.07,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-05T11:30:00Z",
+          "home": "Newcastle",
+          "away": "Bournemouth",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-06T13:00:00Z",
+          "home": "Everton",
+          "away": "Man United",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 87,
+          "odds": 1.09,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-08-31T19:00:00Z",
+          "home": "Aston Villa",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 87,
+          "odds": 1.09,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Brighton",
+          "away": "Leeds",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Nott'm Forest",
+          "away": "Tottenham",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-05T16:30:00Z",
+          "home": "Hull",
+          "away": "Aston Villa",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-04T19:00:00Z",
+          "home": "Real Betis",
+          "away": "Real Madrid",
+          "competition": "La Liga",
+          "selection": "Under 4.5",
+          "probability": 85,
+          "odds": 1.12,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-06T14:15:00Z",
+          "home": "Valencia",
+          "away": "Barcelona",
+          "competition": "La Liga",
+          "selection": "Under 4.5",
+          "probability": 84,
+          "odds": 1.13,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-06T15:30:00Z",
+          "home": "Arsenal",
+          "away": "Chelsea",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 84,
+          "odds": 1.13,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "AFC Bournemouth",
+          "away": "Brentford",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Crystal Palace",
+          "away": "Ipswich",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Aston Villa",
+          "away": "Nott'm Forest",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 87,
+          "odds": 1.09,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-12T16:30:00Z",
+          "home": "Tottenham",
+          "away": "Everton",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Liverpool",
+          "away": "Fulham",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 85,
+          "odds": 1.12,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-13T13:00:00Z",
+          "home": "Coventry",
+          "away": "Brighton",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 87,
+          "odds": 1.09,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-14T19:00:00Z",
+          "home": "Leeds",
+          "away": "Newcastle",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-12T19:00:00Z",
+          "home": "Sunderland",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Under 4.5",
+          "probability": 85,
+          "odds": 1.12,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-02T19:00:00Z",
+          "home": "Wolves",
+          "away": "Burnley",
+          "competition": "EFL Cup",
+          "selection": "Under 4.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-02T18:45:00Z",
+          "home": "Leicester",
+          "away": "Aston Villa",
+          "competition": "EFL Cup",
+          "selection": "Under 4.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-03T18:00:00Z",
+          "home": "Al Ettifaq",
+          "away": "Al Shabab",
+          "competition": "Saudi Pro League",
+          "selection": "Under 4.5",
+          "probability": 85,
+          "odds": 1.12,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-02T16:00:00Z",
+          "home": "Al Ittihad",
+          "away": "Al Ahli",
+          "competition": "Saudi Pro League",
+          "selection": "Under 4.5",
+          "probability": 82,
+          "odds": 1.16,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Inter",
+          "away": "Ajax",
+          "competition": "UCL",
+          "selection": "Under 4.5",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-16T16:45:00Z",
+          "home": "Galatasaray",
+          "away": "Atletico Madrid",
+          "competition": "UCL",
+          "selection": "Under 4.5",
+          "probability": 87,
+          "odds": 1.09,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-18T12:30:00Z",
+          "home": "Luton",
+          "away": "Millwall",
+          "competition": "FA Cup",
+          "selection": "Under 4.5",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "under_4_5"
+        },
+        {
+          "kickoff": "2026-09-19T14:00:00Z",
+          "home": "Portsmouth",
+          "away": "West Brom",
+          "competition": "FA Cup",
+          "selection": "Under 4.5",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "under_4_5"
+        }
+      ]
+    },
+    "double_chance": {
+      "title": "Double Chance · 30-fold",
+      "description": "Favourite 1X / X2 only — short prices, multi-league. Draw saves the leg.",
+      "legs": [
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Man City",
+          "away": "Coventry",
+          "competition": "Premier League",
+          "selection": "Man City 1X",
+          "probability": 96,
+          "odds": 1.05,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-08-31T18:30:00Z",
+          "home": "Barcelona",
+          "away": "Rayo Vallecano",
+          "competition": "La Liga",
+          "selection": "Barcelona 1X",
+          "probability": 95,
+          "odds": 1.05,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-04T19:00:00Z",
+          "home": "Ipswich",
+          "away": "Liverpool",
+          "competition": "Premier League",
+          "selection": "Liverpool X2",
+          "probability": 93,
+          "odds": 1.05,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-04T19:00:00Z",
+          "home": "Real Betis",
+          "away": "Real Madrid",
+          "competition": "La Liga",
+          "selection": "Real Madrid X2",
+          "probability": 92,
+          "odds": 1.05,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-06T14:15:00Z",
+          "home": "Valencia",
+          "away": "Barcelona",
+          "competition": "La Liga",
+          "selection": "Barcelona X2",
+          "probability": 91,
+          "odds": 1.05,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-08-31T19:00:00Z",
+          "home": "Aston Villa",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Arsenal X2",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-06T13:00:00Z",
+          "home": "Everton",
+          "away": "Man United",
+          "competition": "Premier League",
+          "selection": "Man United X2",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-06T15:30:00Z",
+          "home": "Arsenal",
+          "away": "Chelsea",
+          "competition": "Premier League",
+          "selection": "Arsenal 1X",
+          "probability": 87,
+          "odds": 1.09,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Nott'm Forest",
+          "away": "Tottenham",
+          "competition": "Premier League",
+          "selection": "Tottenham X2",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-05T11:30:00Z",
+          "home": "Newcastle",
+          "away": "Bournemouth",
+          "competition": "Premier League",
+          "selection": "Newcastle 1X",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Brighton",
+          "away": "Leeds",
+          "competition": "Premier League",
+          "selection": "Brighton 1X",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-05T16:30:00Z",
+          "home": "Hull",
+          "away": "Aston Villa",
+          "competition": "Premier League",
+          "selection": "Aston Villa X2",
+          "probability": 85,
+          "odds": 1.12,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Fulham",
+          "away": "Crystal Palace",
+          "competition": "Premier League",
+          "selection": "Fulham 1X",
+          "probability": 84,
+          "odds": 1.13,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Chelsea",
+          "away": "Hull",
+          "competition": "Premier League",
+          "selection": "Chelsea 1X",
+          "probability": 94,
+          "odds": 1.05,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Liverpool",
+          "away": "Fulham",
+          "competition": "Premier League",
+          "selection": "Liverpool 1X",
+          "probability": 91,
+          "odds": 1.05,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-13T15:30:00Z",
+          "home": "Man United",
+          "away": "Man City",
+          "competition": "Premier League",
+          "selection": "Man City X2",
+          "probability": 82,
+          "odds": 1.16,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-12T16:30:00Z",
+          "home": "Tottenham",
+          "away": "Everton",
+          "competition": "Premier League",
+          "selection": "Tottenham 1X",
+          "probability": 87,
+          "odds": 1.09,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-12T19:00:00Z",
+          "home": "Sunderland",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Arsenal X2",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Brentford",
+          "away": "Sunderland",
+          "competition": "Premier League",
+          "selection": "Brentford 1X",
+          "probability": 83,
+          "odds": 1.14,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-08-31T16:30:00Z",
+          "home": "Osasuna",
+          "away": "Getafe",
+          "competition": "La Liga",
+          "selection": "Osasuna 1X",
+          "probability": 82,
+          "odds": 1.16,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-03T19:00:00Z",
+          "home": "Sheffield United",
+          "away": "Man City",
+          "competition": "EFL Cup",
+          "selection": "Man City X2",
+          "probability": 92,
+          "odds": 1.05,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-02T18:45:00Z",
+          "home": "Leicester",
+          "away": "Aston Villa",
+          "competition": "EFL Cup",
+          "selection": "Aston Villa X2",
+          "probability": 84,
+          "odds": 1.13,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-02T19:00:00Z",
+          "home": "Wolves",
+          "away": "Burnley",
+          "competition": "EFL Cup",
+          "selection": "Wolves 1X",
+          "probability": 85,
+          "odds": 1.12,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-01T19:00:00Z",
+          "home": "Al Hilal",
+          "away": "Al Nassr",
+          "competition": "Saudi Pro League",
+          "selection": "Al Hilal 1X",
+          "probability": 82,
+          "odds": 1.16,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-02T16:00:00Z",
+          "home": "Al Ittihad",
+          "away": "Al Ahli",
+          "competition": "Saudi Pro League",
+          "selection": "Al Ittihad 1X",
+          "probability": 80,
+          "odds": 1.19,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Bayern Munich",
+          "away": "Dinamo Zagreb",
+          "competition": "UCL",
+          "selection": "Bayern Munich 1X",
+          "probability": 95,
+          "odds": 1.05,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-16T19:00:00Z",
+          "home": "PSV",
+          "away": "Liverpool",
+          "competition": "UCL",
+          "selection": "Liverpool X2",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Inter",
+          "away": "Ajax",
+          "competition": "UCL",
+          "selection": "Inter 1X",
+          "probability": 90,
+          "odds": 1.06,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-18T19:00:00Z",
+          "home": "Wrexham",
+          "away": "Sheffield Wednesday",
+          "competition": "FA Cup",
+          "selection": "Wrexham 1X",
+          "probability": 82,
+          "odds": 1.16,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-18T12:30:00Z",
+          "home": "Luton",
+          "away": "Millwall",
+          "competition": "FA Cup",
+          "selection": "Luton 1X",
+          "probability": 80,
+          "odds": 1.19,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        }
+      ]
+    },
+    "straight_win": {
+      "title": "Straight Win 80+ · 24-fold",
+      "description": "Short-priced favourite wins only (1X2), estimated >80%. Multi-league — same style as winning multibets. Sorted by %.",
+      "legs": [
+        {
+          "kickoff": "2026-09-18T12:30:00Z",
+          "home": "Arsenal",
+          "away": "Accrington",
+          "competition": "FA Cup",
+          "selection": "Arsenal",
+          "probability": 92,
+          "odds": 1.08,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Man City",
+          "away": "Coventry",
+          "competition": "Premier League",
+          "selection": "Man City",
+          "probability": 90,
+          "odds": 1.08,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-18T14:00:00Z",
+          "home": "Man United",
+          "away": "Newport",
+          "competition": "FA Cup",
+          "selection": "Man United",
+          "probability": 89,
+          "odds": 1.09,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Bayern Munich",
+          "away": "Dinamo Zagreb",
+          "competition": "UCL",
+          "selection": "Bayern Munich",
+          "probability": 88,
+          "odds": 1.1,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-08-31T18:30:00Z",
+          "home": "Barcelona",
+          "away": "Rayo Vallecano",
+          "competition": "La Liga",
+          "selection": "Barcelona",
+          "probability": 87,
+          "odds": 1.11,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-16T19:00:00Z",
+          "home": "Real Madrid",
+          "away": "Sturm Graz",
+          "competition": "UCL",
+          "selection": "Real Madrid",
+          "probability": 87,
+          "odds": 1.11,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-01T19:00:00Z",
+          "home": "Al Hilal",
+          "away": "Damac",
+          "competition": "Saudi Pro League",
+          "selection": "Al Hilal",
+          "probability": 86,
+          "odds": 1.13,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-16T19:00:00Z",
+          "home": "PSG",
+          "away": "Girona",
+          "competition": "UCL",
+          "selection": "PSG",
+          "probability": 86,
+          "odds": 1.13,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Chelsea",
+          "away": "Hull",
+          "competition": "Premier League",
+          "selection": "Chelsea",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-02T16:00:00Z",
+          "home": "Al Nassr",
+          "away": "Al Okhdood",
+          "competition": "Saudi Pro League",
+          "selection": "Al Nassr",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-18T15:00:00Z",
+          "home": "Celtic",
+          "away": "Falkirk",
+          "competition": "Scotland",
+          "selection": "Celtic",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Liverpool",
+          "away": "Fulham",
+          "competition": "Premier League",
+          "selection": "Liverpool",
+          "probability": 84,
+          "odds": 1.15,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-04T19:00:00Z",
+          "home": "Ipswich",
+          "away": "Liverpool",
+          "competition": "Premier League",
+          "selection": "Liverpool",
+          "probability": 84,
+          "odds": 1.15,
+          "settleKind": "straight_win",
+          "winSide": "away"
+        },
+        {
+          "kickoff": "2026-09-03T19:00:00Z",
+          "home": "Sheffield United",
+          "away": "Man City",
+          "competition": "EFL Cup",
+          "selection": "Man City",
+          "probability": 84,
+          "odds": 1.15,
+          "settleKind": "straight_win",
+          "winSide": "away"
+        },
+        {
+          "kickoff": "2026-09-02T18:45:00Z",
+          "home": "Leicester",
+          "away": "Grimsby",
+          "competition": "EFL Cup",
+          "selection": "Leicester",
+          "probability": 83,
+          "odds": 1.17,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Inter",
+          "away": "Ajax",
+          "competition": "UCL",
+          "selection": "Inter",
+          "probability": 83,
+          "odds": 1.17,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-18T17:00:00Z",
+          "home": "Sporting CP",
+          "away": "Rio Ave",
+          "competition": "Portugal",
+          "selection": "Sporting CP",
+          "probability": 83,
+          "odds": 1.17,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-19T18:00:00Z",
+          "home": "Galatasaray",
+          "away": "Goztepe",
+          "competition": "Turkey",
+          "selection": "Galatasaray",
+          "probability": 82,
+          "odds": 1.18,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-04T19:00:00Z",
+          "home": "Real Betis",
+          "away": "Real Madrid",
+          "competition": "La Liga",
+          "selection": "Real Madrid",
+          "probability": 82,
+          "odds": 1.18,
+          "settleKind": "straight_win",
+          "winSide": "away"
+        },
+        {
+          "kickoff": "2026-09-12T19:00:00Z",
+          "home": "Sunderland",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Arsenal",
+          "probability": 82,
+          "odds": 1.18,
+          "settleKind": "straight_win",
+          "winSide": "away"
+        },
+        {
+          "kickoff": "2026-09-19T19:00:00Z",
+          "home": "AC Milan",
+          "away": "Venezia",
+          "competition": "Serie A",
+          "selection": "AC Milan",
+          "probability": 82,
+          "odds": 1.18,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-19T16:30:00Z",
+          "home": "Al Ahli",
+          "away": "Al Fateh",
+          "competition": "Saudi Pro League",
+          "selection": "Al Ahli",
+          "probability": 81,
+          "odds": 1.2,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-20T14:00:00Z",
+          "home": "Pyramids",
+          "away": "El Gouna",
+          "competition": "Egypt",
+          "selection": "Pyramids",
+          "probability": 81,
+          "odds": 1.2,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-06T14:15:00Z",
+          "home": "Valencia",
+          "away": "Barcelona",
+          "competition": "La Liga",
+          "selection": "Barcelona",
+          "probability": 81,
+          "odds": 1.2,
+          "settleKind": "straight_win",
+          "winSide": "away"
+        }
+      ]
+    },
+    "mixed": {
+      "title": "Mixed quality · 25-fold",
+      "description": "Winning-multibet style: short 1X2 favourites + Double Chance only, one leg per match, ≥85%. No repeat fixtures.",
+      "legs": [
+        {
+          "kickoff": "2026-09-05T14:00:00Z",
+          "home": "Man City",
+          "away": "Coventry",
+          "competition": "Premier League",
+          "selection": "Man City 1X",
+          "probability": 96,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-08-31T18:30:00Z",
+          "home": "Barcelona",
+          "away": "Rayo Vallecano",
+          "competition": "La Liga",
+          "selection": "Barcelona 1X",
+          "probability": 95,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Bayern Munich",
+          "away": "Dinamo Zagreb",
+          "competition": "UCL",
+          "selection": "Bayern Munich 1X",
+          "probability": 95,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-18T12:30:00Z",
+          "home": "Arsenal",
+          "away": "Accrington",
+          "competition": "FA Cup",
+          "selection": "Arsenal",
+          "probability": 92,
+          "odds": 1.08,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-18T18:00:00Z",
+          "home": "Zed FC",
+          "away": "AL Ahly",
+          "competition": "Egypt",
+          "selection": "AL Ahly X2",
+          "probability": 92,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-03T19:00:00Z",
+          "home": "Sheffield United",
+          "away": "Man City",
+          "competition": "EFL Cup",
+          "selection": "Man City X2",
+          "probability": 92,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-19T17:00:00Z",
+          "home": "Lille",
+          "away": "PSG",
+          "competition": "Ligue 1",
+          "selection": "PSG X2",
+          "probability": 91,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-17T19:00:00Z",
+          "home": "Inter",
+          "away": "Ajax",
+          "competition": "UCL",
+          "selection": "Inter 1X",
+          "probability": 90,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-02T18:45:00Z",
+          "home": "Leicester",
+          "away": "Grimsby",
+          "competition": "EFL Cup",
+          "selection": "Leicester 1X",
+          "probability": 90,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-18T14:00:00Z",
+          "home": "Man United",
+          "away": "Newport",
+          "competition": "FA Cup",
+          "selection": "Man United",
+          "probability": 89,
+          "odds": 1.09,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-08-31T19:00:00Z",
+          "home": "Aston Villa",
+          "away": "Arsenal",
+          "competition": "Premier League",
+          "selection": "Arsenal X2",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-16T19:00:00Z",
+          "home": "PSV",
+          "away": "Liverpool",
+          "competition": "UCL",
+          "selection": "Liverpool X2",
+          "probability": 88,
+          "odds": 1.08,
+          "settleKind": "double_chance",
+          "dcSide": "X2"
+        },
+        {
+          "kickoff": "2026-09-16T19:00:00Z",
+          "home": "Real Madrid",
+          "away": "Sturm Graz",
+          "competition": "UCL",
+          "selection": "Real Madrid",
+          "probability": 87,
+          "odds": 1.11,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-01T19:00:00Z",
+          "home": "Al Hilal",
+          "away": "Damac",
+          "competition": "Saudi Pro League",
+          "selection": "Al Hilal",
+          "probability": 86,
+          "odds": 1.13,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-16T19:00:00Z",
+          "home": "PSG",
+          "away": "Girona",
+          "competition": "UCL",
+          "selection": "PSG",
+          "probability": 86,
+          "odds": 1.13,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-19T14:00:00Z",
+          "home": "Genclerbirligi",
+          "away": "Erzurumspor",
+          "competition": "Turkey",
+          "selection": "Genclerbirligi 1X",
+          "probability": 86,
+          "odds": 1.1,
+          "settleKind": "double_chance",
+          "dcSide": "1X"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Chelsea",
+          "away": "Hull",
+          "competition": "Premier League",
+          "selection": "Chelsea",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-02T16:00:00Z",
+          "home": "Al Nassr",
+          "away": "Al Okhdood",
+          "competition": "Saudi Pro League",
+          "selection": "Al Nassr",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-18T15:00:00Z",
+          "home": "Celtic",
+          "away": "Falkirk",
+          "competition": "Scotland",
+          "selection": "Celtic",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-18T17:00:00Z",
+          "home": "Sporting CP",
+          "away": "Rio Ave",
+          "competition": "Portugal",
+          "selection": "Sporting CP",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-19T18:00:00Z",
+          "home": "Galatasaray",
+          "away": "Goztepe",
+          "competition": "Turkey",
+          "selection": "Galatasaray",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-19T19:00:00Z",
+          "home": "AC Milan",
+          "away": "Venezia",
+          "competition": "Serie A",
+          "selection": "AC Milan",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Liverpool",
+          "away": "Fulham",
+          "competition": "Premier League",
+          "selection": "Liverpool",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-20T14:00:00Z",
+          "home": "Pyramids",
+          "away": "El Gouna",
+          "competition": "Egypt",
+          "selection": "Pyramids",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        },
+        {
+          "kickoff": "2026-09-19T16:30:00Z",
+          "home": "Al Ahli",
+          "away": "Al Fateh",
+          "competition": "Saudi Pro League",
+          "selection": "Al Ahli",
+          "probability": 85,
+          "odds": 1.14,
+          "settleKind": "straight_win",
+          "winSide": "home"
+        }
+      ]
+    }
+  }
+}
