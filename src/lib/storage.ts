@@ -8,7 +8,7 @@ import {
 } from '../data/seedSlips'
 import { MARKET_ORDER } from '../data/markets'
 
-const STORAGE_KEY = 'lotto-slips-v10'
+const STORAGE_KEY = 'lotto-slips-v11'
 
 let activeCard: WeeklyCard = getFallbackCard()
 
