@@ -203,7 +203,7 @@ export default function App() {
             </h1>
             <p>
               Weekly card from JSON · real odds on every leg · FT scores settle TTS / O1.5 / U4.5 /
-              DC. Mixed 85+ still manual-friendly. Skip TTS if no Over 0.5 market.
+              DC / SW. Mixed 85+ still manual-friendly. Skip TTS if no Over 0.5 market.
             </p>
           </div>
           <div className="hero-actions">
@@ -262,7 +262,7 @@ export default function App() {
           <div className="panel-head">
             <h2>{week?.label ?? 'Active week'}</h2>
             <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>
-              {primarySlips.length}/5 slips · card v{card.cardVersion || CARD_VERSION}
+              {primarySlips.length}/6 slips · card v{card.cardVersion || CARD_VERSION}
               {cardLoading ? ' · loading…' : ''}
             </span>
           </div>

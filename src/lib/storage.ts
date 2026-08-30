@@ -6,8 +6,9 @@ import {
   currentWeekKey,
   getFallbackCard,
 } from '../data/seedSlips'
+import { MARKET_ORDER } from '../data/markets'
 
-const STORAGE_KEY = 'lotto-slips-v9'
+const STORAGE_KEY = 'lotto-slips-v10'
 
 let activeCard: WeeklyCard = getFallbackCard()
 
@@ -46,9 +47,13 @@ export function loadState(): AppState {
 export function migrateIfStale(state: AppState, card: WeeklyCard = activeCard): AppState {
   const targetVersion = Math.max(CARD_VERSION, card.cardVersion)
   const active = state.weeks.find((w) => w.weekKey === state.activeWeekKey) ?? state.weeks[0]
+  const hasAllMarkets = MARKET_ORDER.every((id) =>
+    active?.slips?.some((s) => s.marketId === id && !s.rebetOf),
+  )
   const stale =
     (state.cardVersion ?? 0) < targetVersion ||
     (active?.cardVersion ?? 0) < targetVersion ||
+    !hasAllMarkets ||
     !active?.slips?.some((s) => s.legs.some((l) => l.competition)) ||
     !active?.slips?.some((s) => s.legs.some((l) => typeof l.odds === 'number' && l.odds > 1)) ||
     !active?.slips?.some((s) => s.legs.some((l) => Boolean(l.settleKind)))

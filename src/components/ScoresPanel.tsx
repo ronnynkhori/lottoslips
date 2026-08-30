@@ -40,8 +40,8 @@ export function ScoresPanel({
       </div>
       <div className="panel-body">
         <p className="empty" style={{ paddingTop: 0 }}>
-          Enter full-time scores, then apply. Settles TTS / O1.5 / U4.5 / DC automatically. Manual
-          W/L/V still wins if you override.
+          Enter full-time scores, then apply. Settles TTS / O1.5 / U4.5 / DC / SW automatically.
+          Manual W/L/V still wins if you override.
         </p>
         <p style={{ margin: '0 0 0.75rem', color: 'var(--muted)', fontSize: '0.8rem' }}>
           {scored}/{fixtures.length} fixtures scored

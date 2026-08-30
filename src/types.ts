@@ -3,15 +3,24 @@ export type MarketId =
   | 'over_1_5'
   | 'under_4_5'
   | 'double_chance'
+  | 'straight_win'
   | 'mixed'
 
 export type LegResult = 'pending' | 'won' | 'lost' | 'void'
 
 export type DoubleChanceSide = '1X' | 'X2' | '12'
 
-export type SettleKind = 'team_to_score' | 'over_1_5' | 'under_4_5' | 'double_chance'
+export type SettleKind =
+  | 'team_to_score'
+  | 'over_1_5'
+  | 'under_4_5'
+  | 'double_chance'
+  | 'straight_win'
 
 export type ScoringSide = 'home' | 'away'
+
+/** Outright match winner (no draw) */
+export type WinSide = 'home' | 'away'
 
 export interface Leg {
   id: string
@@ -33,6 +42,8 @@ export interface Leg {
   settleKind: SettleKind
   /** For TTS: which side must score */
   scoringSide?: ScoringSide
+  /** For straight win: which side must win */
+  winSide?: WinSide
   /** For double chance market */
   dcSide?: DoubleChanceSide
 }
@@ -120,6 +131,7 @@ export interface CardLegDraft {
   odds: number
   settleKind: SettleKind
   scoringSide?: ScoringSide
+  winSide?: WinSide
   dcSide?: DoubleChanceSide
 }
 
