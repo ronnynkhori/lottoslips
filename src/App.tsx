@@ -346,8 +346,12 @@ export default function App() {
       </div>
 
       <p className="footer-note">
-        Card v{card.cardVersion || CARD_VERSION} from <code>/cards/current.json</code> · PL, Liga,
-        EFL, FA Cup, UCL, Saudi. Odds + FT settle. <strong>Reload fixtures</strong> after card
+        Live:{' '}
+        <a href="https://ronnynkhori.github.io/lottoslips/" target="_blank" rel="noreferrer">
+          ronnynkhori.github.io/lottoslips
+        </a>
+        {' · '}
+        Card v{card.cardVersion || CARD_VERSION}. <strong>Reload fixtures</strong> after card
         updates. Not betting advice.
       </p>
     </div>
