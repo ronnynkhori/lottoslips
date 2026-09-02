@@ -1,5 +1,5 @@
 {
-  "cardVersion": 18,
+  "cardVersion": 19,
   "weekKey": "2026-W36",
   "label": "Week 36 · diversified MIX card",
   "updatedAt": "2026-09-02T11:54:25.190Z",
@@ -1540,7 +1540,7 @@
     },
     "mixed": {
       "title": "Payout mix (auto-built)",
-      "description": "Built at load — handicap-heavy, 68%+ at 1.38+ odds, best payout per fixture.",
+      "description": "Safe / Value / Moonshot — min odds 1.20+, EV-scored, diversified markets.",
       "legs": [
         {
           "kickoff": "2026-09-05T14:00:00Z",
