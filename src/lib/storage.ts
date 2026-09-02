@@ -22,7 +22,7 @@ function hasPrimarySlipsForWeek(slips: Slip[] | undefined): boolean {
   })
 }
 
-const STORAGE_KEY = 'lotto-slips-v18'
+const STORAGE_KEY = 'lotto-slips-v19'
 
 let activeCard: WeeklyCard = getFallbackCard()
 

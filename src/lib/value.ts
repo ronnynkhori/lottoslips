@@ -32,9 +32,12 @@ export const SW_VALUE_RULES: ValuePickRules = {
   maxOdds: 1.85,
 }
 
+/** Global MIX floor — legs below this are treated as crushed bankers */
+export const MIX_MIN_ODDS = 1.2
+
 export const MIX_VALUE_RULES: ValuePickRules = {
   minProbability: 68,
-  minOdds: 1.38,
+  minOdds: MIX_MIN_ODDS,
   minEdge: 1.02,
   maxOdds: 2.45,
 }
@@ -54,7 +57,7 @@ export const MIX_TIER_CONFIGS: MixTierConfig[] = [
     tier: 'safe',
     label: 'Safe',
     legTarget: 12,
-    rules: { minProbability: 74, minOdds: 1.32, minEdge: 1.03, maxOdds: 1.58 },
+    rules: { minProbability: 74, minOdds: MIX_MIN_ODDS, minEdge: 1.03, maxOdds: 1.58 },
     maxPerCompetition: 3,
     payoutBias: 0,
   },
@@ -62,7 +65,7 @@ export const MIX_TIER_CONFIGS: MixTierConfig[] = [
     tier: 'value',
     label: 'Value',
     legTarget: 16,
-    rules: { minProbability: 70, minOdds: 1.36, minEdge: 1.02, maxOdds: 1.78 },
+    rules: { minProbability: 70, minOdds: MIX_MIN_ODDS, minEdge: 1.02, maxOdds: 1.78 },
     maxPerCompetition: 4,
     payoutBias: 0.35,
   },
@@ -70,7 +73,7 @@ export const MIX_TIER_CONFIGS: MixTierConfig[] = [
     tier: 'moonshot',
     label: 'Moonshot',
     legTarget: 20,
-    rules: { minProbability: 66, minOdds: 1.42, minEdge: 1.02, maxOdds: 2.45 },
+    rules: { minProbability: 66, minOdds: MIX_MIN_ODDS, minEdge: 1.02, maxOdds: 2.45 },
     maxPerCompetition: 5,
     payoutBias: 0.7,
   },
@@ -102,22 +105,15 @@ export const MIX_DIVERSITY: Record<
   },
 }
 
-/** Goals markets use slightly lower odds floors so they can compete in MIX */
+/** Goals markets share the same 1.20 floor — edge % still filters weak prices */
 export function mixRulesForKind(
   settleKind: SettleKind,
   base: ValuePickRules,
 ): ValuePickRules {
-  if (settleKind === 'over_1_5') {
+  if (settleKind === 'over_1_5' || settleKind === 'under_4_5') {
     return {
       ...base,
-      minOdds: Math.min(base.minOdds, 1.32),
-      minProbability: Math.max(72, base.minProbability - 2),
-    }
-  }
-  if (settleKind === 'under_4_5') {
-    return {
-      ...base,
-      minOdds: Math.min(base.minOdds, 1.28),
+      minOdds: MIX_MIN_ODDS,
       minProbability: Math.max(70, base.minProbability - 2),
     }
   }
