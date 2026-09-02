@@ -28,6 +28,18 @@ export function settleFromScore(leg: Leg, homeGoals: number, awayGoals: number):
       if (side === 'home') return homeGoals > awayGoals ? 'won' : 'lost'
       return awayGoals > homeGoals ? 'won' : 'lost'
     }
+    case 'handicap': {
+      const side = leg.handicapSide ?? 'home'
+      const line = leg.handicapLine ?? -1
+      const sideGoals = side === 'home' ? homeGoals : awayGoals
+      const oppGoals = side === 'home' ? awayGoals : homeGoals
+      const adjustedDiff = sideGoals + line - oppGoals
+      const isHalfLine = Math.abs(line % 1) === 0.5
+      if (isHalfLine) return adjustedDiff > 0 ? 'won' : 'lost'
+      if (adjustedDiff > 0) return 'won'
+      if (adjustedDiff === 0) return 'void'
+      return 'lost'
+    }
     default:
       return 'pending'
   }

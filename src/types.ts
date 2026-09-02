@@ -3,6 +3,7 @@ export type MarketId =
   | 'over_1_5'
   | 'under_4_5'
   | 'double_chance'
+  | 'handicap'
   | 'straight_win'
   | 'mixed'
 
@@ -15,6 +16,7 @@ export type SettleKind =
   | 'over_1_5'
   | 'under_4_5'
   | 'double_chance'
+  | 'handicap'
   | 'straight_win'
 
 export type ScoringSide = 'home' | 'away'
@@ -46,6 +48,10 @@ export interface Leg {
   winSide?: WinSide
   /** For double chance market */
   dcSide?: DoubleChanceSide
+  /** For Asian handicap: line applied to picked side (e.g. -1, -1.5, +1) */
+  handicapLine?: number
+  /** Which side receives the handicap line */
+  handicapSide?: WinSide
 }
 
 export interface Slip {
@@ -133,6 +139,8 @@ export interface CardLegDraft {
   scoringSide?: ScoringSide
   winSide?: WinSide
   dcSide?: DoubleChanceSide
+  handicapLine?: number
+  handicapSide?: WinSide
 }
 
 export interface CardMarketDraft {

@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { MARKETS } from '../data/markets'
 import type { Leg, LegResult, Slip } from '../types'
 import { potentialReturn, slipLegSummary } from '../lib/stats'
-import { valueEdge, valueScore } from '../lib/value'
+import { valueEdge, mixPayoutScore } from '../lib/value'
 
 function formatKickoff(iso: string) {
   const d = new Date(iso)
@@ -79,13 +79,13 @@ export function SlipPanel({ slip, onSetResult }: Props) {
     if (sortByProb) {
       const sorted = [...slip.legs].sort(
         (a, b) =>
-          valueScore(b.probability, b.odds) - valueScore(a.probability, a.odds) ||
-          b.odds - a.odds,
+          mixPayoutScore(b.probability, b.odds, b.settleKind) -
+            mixPayoutScore(a.probability, a.odds, a.settleKind) || b.odds - a.odds,
       )
       const label =
         slip.marketId === 'straight_win'
           ? 'Value 1X2 · sorted by edge'
-          : 'Value mix · best edge per fixture'
+          : 'Payout mix · handicap + value legs'
       return [{ competition: label, legs: sorted }]
     }
     return groupLegsByCompetition(slip.legs)
@@ -171,8 +171,12 @@ function LegRow({
                 ? 'Double Chance'
                 : leg.settleKind === 'straight_win'
                   ? '1X2'
-                  : leg.competition}
-              {(leg.settleKind === 'straight_win' || leg.settleKind === 'double_chance') &&
+                  : leg.settleKind === 'handicap'
+                    ? 'Handicap'
+                    : leg.competition}
+              {(leg.settleKind === 'straight_win' ||
+                leg.settleKind === 'double_chance' ||
+                leg.settleKind === 'handicap') &&
                 ` · ${leg.competition}`}
             </span>
           )}
