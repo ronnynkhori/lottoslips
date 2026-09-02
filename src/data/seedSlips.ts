@@ -6,6 +6,13 @@ import type {
   WeekBundle,
   WeeklyCard,
 } from '../types'
+import {
+  MIX_VALUE_RULES,
+  SW_VALUE_RULES,
+  passesValueRules,
+  valueEdge,
+  valueScore,
+} from '../lib/value'
 import fallbackCard from './currentCard.json'
 import { MARKET_ORDER } from './markets'
 
@@ -36,55 +43,97 @@ function toLeg(draft: CardLegDraft): Leg {
 export function oddsFromProb(probability: number): number {
   const p = Math.min(99, Math.max(50, probability))
   const fair = 100 / p
-  return Math.max(1.05, Math.round(fair * 0.95 * 100) / 100)
+  return Math.max(1.15, Math.round(fair * 0.9 * 100) / 100)
+}
+
+function fixtureKey(leg: Pick<Leg, 'kickoff' | 'home' | 'away'>): string {
+  return `${leg.kickoff}|${leg.home}|${leg.away}`
+}
+
+function sortByValueThenKickoff(a: Leg, b: Leg): number {
+  return (
+    valueScore(b.probability, b.odds) - valueScore(a.probability, a.odds) ||
+    b.odds - a.odds ||
+    new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime()
+  )
+}
+
+function dedupeOnePerFixture(legs: Leg[]): Leg[] {
+  const seen = new Set<string>()
+  const out: Leg[] = []
+  for (const leg of legs) {
+    const key = fixtureKey(leg)
+    if (seen.has(key)) continue
+    seen.add(key)
+    out.push(leg)
+  }
+  return out
+}
+
+/** Pool every market on the card and keep legs that pay better than their implied chance */
+function buildValueMixSlip(card: WeeklyCard, stake: number, createdAt: string): Slip | null {
+  const pool = MARKET_ORDER.flatMap((marketId) => {
+    const draft = card.markets[marketId]
+    if (!draft?.legs?.length) return []
+    return draft.legs.map(toLeg)
+  })
+
+  const legs = dedupeOnePerFixture(
+    pool
+      .filter((l) => passesValueRules(l.probability, l.odds, MIX_VALUE_RULES))
+      .sort(sortByValueThenKickoff),
+  ).slice(0, 25)
+
+  if (!legs.length) return null
+
+  const avgOdds = legs.reduce((s, l) => s + l.odds, 0) / legs.length
+  const combined = legs.reduce((s, l) => s * l.odds, 1)
+
+  return {
+    id: crypto.randomUUID(),
+    marketId: 'mixed',
+    title: `Value mix · ${legs.length}-fold`,
+    description: `High-confidence legs with juice (72%+ · odds 1.25+ · value edge). Avg leg @${avgOdds.toFixed(2)} · combined ~${combined.toFixed(0)}x`,
+    createdAt,
+    weekKey: card.weekKey,
+    stake,
+    status: 'open',
+    legs,
+  }
 }
 
 export function createSlipsFromCard(card: WeeklyCard, stake: number): Slip[] {
   const createdAt = new Date().toISOString()
   const weekKey = card.weekKey
 
-  return MARKET_ORDER.flatMap((marketId) => {
+  const standard = MARKET_ORDER.filter((id) => id !== 'mixed').flatMap((marketId) => {
     const draft = card.markets[marketId]
     if (!draft?.legs?.length) return []
     let legs = draft.legs.map(toLeg)
     if (marketId === 'straight_win') {
       legs = legs
-        .filter((l) => l.probability > 80)
-        .sort(
-          (a, b) =>
-            b.probability - a.probability ||
-            new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime(),
-        )
-    } else if (marketId === 'mixed') {
-      // Quality multibet style: 1X2 / DC only, ≥85%, one leg per fixture
-      legs = [...legs]
-        .filter(
-          (l) =>
-            l.probability >= 85 &&
-            (l.settleKind === 'straight_win' || l.settleKind === 'double_chance'),
-        )
-        .sort((a, b) => b.probability - a.probability)
-        .filter((leg, _i, arr) => {
-          const key = `${leg.kickoff}|${leg.home}|${leg.away}`
-          return (
-            arr.findIndex((x) => `${x.kickoff}|${x.home}|${x.away}` === key) === arr.indexOf(leg)
-          )
-        })
-        .sort(
-          (a, b) =>
-            b.probability - a.probability ||
-            new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime(),
-        )
+        .filter((l) => passesValueRules(l.probability, l.odds, SW_VALUE_RULES))
+        .sort(sortByValueThenKickoff)
     } else {
       legs = [...legs].sort(
         (a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime(),
       )
     }
+    const avgOdds = legs.reduce((s, l) => s + l.odds, 0) / Math.max(1, legs.length)
+    const minEdge = legs.length
+      ? Math.min(...legs.map((l) => valueEdge(l.probability, l.odds)))
+      : 0
     const slip: Slip = {
       id: crypto.randomUUID(),
       marketId,
-      title: draft.title,
-      description: draft.description,
+      title:
+        marketId === 'straight_win'
+          ? `Value wins · ${legs.length}-fold`
+          : draft.title,
+      description:
+        marketId === 'straight_win'
+          ? `Confident 1X2 picks priced with upside (72%+ · odds 1.28+ · min edge ${(minEdge * 100 - 100).toFixed(0)}%). Avg @${avgOdds.toFixed(2)}`
+          : draft.description,
       createdAt,
       weekKey,
       stake,
@@ -93,6 +142,9 @@ export function createSlipsFromCard(card: WeeklyCard, stake: number): Slip[] {
     }
     return [slip]
   })
+
+  const mix = buildValueMixSlip(card, stake, createdAt)
+  return mix ? [...standard, mix] : standard
 }
 
 export function createWeekBundleFromCard(card: WeeklyCard, stake = 1): WeekBundle {
