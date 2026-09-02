@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { MARKETS } from '../data/markets'
-import { MIX_TIER_CONFIGS } from '../lib/value'
+import { MIX_TIER_CONFIGS, mixTierScore, valueEdge } from '../lib/value'
 import type { Leg, LegResult, Slip } from '../types'
 import {
   accaCombinedOdds,
@@ -11,7 +11,7 @@ import {
   potentialReturn,
   slipLegSummary,
 } from '../lib/stats'
-import { mixTierScore, valueEdge } from '../lib/value'
+import { settleKindLabel } from '../lib/marketLabels'
 
 function formatKickoff(iso: string) {
   const d = new Date(iso)
@@ -203,18 +203,11 @@ function LegRow({
         <div className="leg-sub">
           <span style={{ color: accent }}>{leg.selection}</span>
           {showCompetition && (
+            <span className="leg-market-tag">{settleKindLabel(leg.settleKind)}</span>
+          )}
+          {showCompetition && (
             <span>
-              {leg.settleKind === 'double_chance'
-                ? 'Double Chance'
-                : leg.settleKind === 'straight_win'
-                  ? '1X2'
-                  : leg.settleKind === 'handicap'
-                    ? 'Handicap'
-                    : leg.competition}
-              {(leg.settleKind === 'straight_win' ||
-                leg.settleKind === 'double_chance' ||
-                leg.settleKind === 'handicap') &&
-                ` · ${leg.competition}`}
+              {leg.competition}
             </span>
           )}
           <span>{formatKickoff(leg.kickoff)}</span>

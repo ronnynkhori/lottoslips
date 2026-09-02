@@ -1,4 +1,4 @@
-import type { MixTier } from '../types'
+import type { MixTier, SettleKind } from '../types'
 
 /** Bookmaker implied win chance from decimal odds */
 export function impliedProbability(odds: number): number {
@@ -75,6 +75,63 @@ export const MIX_TIER_CONFIGS: MixTierConfig[] = [
     payoutBias: 0.7,
   },
 ]
+
+/** Cap handicap share and guarantee a mix of market types per tier */
+export const MIX_DIVERSITY: Record<
+  MixTier,
+  { maxHandicap: number; minByKind: Partial<Record<SettleKind, number>> }
+> = {
+  safe: {
+    maxHandicap: 3,
+    minByKind: { team_to_score: 3, over_1_5: 2, double_chance: 2, under_4_5: 1 },
+  },
+  value: {
+    maxHandicap: 5,
+    minByKind: { team_to_score: 4, over_1_5: 2, double_chance: 3, straight_win: 1, under_4_5: 1 },
+  },
+  moonshot: {
+    maxHandicap: 7,
+    minByKind: {
+      team_to_score: 4,
+      over_1_5: 3,
+      double_chance: 3,
+      straight_win: 2,
+      handicap: 4,
+      under_4_5: 2,
+    },
+  },
+}
+
+/** Goals markets use slightly lower odds floors so they can compete in MIX */
+export function mixRulesForKind(
+  settleKind: SettleKind,
+  base: ValuePickRules,
+): ValuePickRules {
+  if (settleKind === 'over_1_5') {
+    return {
+      ...base,
+      minOdds: Math.min(base.minOdds, 1.32),
+      minProbability: Math.max(72, base.minProbability - 2),
+    }
+  }
+  if (settleKind === 'under_4_5') {
+    return {
+      ...base,
+      minOdds: Math.min(base.minOdds, 1.28),
+      minProbability: Math.max(70, base.minProbability - 2),
+    }
+  }
+  return base
+}
+
+export function passesMixRules(
+  probability: number,
+  odds: number,
+  settleKind: SettleKind,
+  config: MixTierConfig,
+): boolean {
+  return passesValueRules(probability, odds, mixRulesForKind(settleKind, config.rules))
+}
 
 /** Score leg for MIX tier — blends EV with payout juice based on tier */
 export function mixTierScore(

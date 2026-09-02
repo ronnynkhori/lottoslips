@@ -2,14 +2,17 @@ import type {
   CardLegDraft,
   Leg,
   MarketId,
+  SettleKind,
   Slip,
   WeekBundle,
   WeeklyCard,
 } from '../types'
 import {
   MIX_TIER_CONFIGS,
+  MIX_DIVERSITY,
   SW_VALUE_RULES,
   mixTierScore,
+  passesMixRules,
   passesValueRules,
   valueEdge,
   valueScore,
@@ -70,18 +73,6 @@ function sortByValueThenKickoff(a: Leg, b: Leg): number {
   )
 }
 
-function dedupeBestPerFixture(legs: Leg[], scoreFn: (leg: Leg) => number): Leg[] {
-  const map = new Map<string, Leg>()
-  for (const leg of legs) {
-    const key = fixtureKey(leg)
-    const existing = map.get(key)
-    if (!existing || scoreFn(leg) > scoreFn(existing)) {
-      map.set(key, leg)
-    }
-  }
-  return [...map.values()]
-}
-
 function applyCompetitionCap(legs: Leg[], maxPerCompetition: number): Leg[] {
   const counts = new Map<string, number>()
   const out: Leg[] = []
@@ -104,19 +95,55 @@ function buildMixPool(card: WeeklyCard): Leg[] {
 }
 
 function selectMixLegs(pool: Leg[], config: MixTierConfig): Leg[] {
+  const diversity = MIX_DIVERSITY[config.tier]
   const score = (leg: Leg) =>
     mixTierScore(leg.probability, leg.odds, config.payoutBias)
 
-  const eligible = pool.filter((l) => passesValueRules(l.probability, l.odds, config.rules))
+  const eligible = pool.filter((l) => passesMixRules(l.probability, l.odds, l.settleKind, config))
 
-  const bestPerFixture = dedupeBestPerFixture(eligible, score).sort(
-    (a, b) => score(b) - score(a) || b.odds - a.odds,
-  )
+  const picked: Leg[] = []
+  const usedFixtures = new Set<string>()
+  const kindCounts = new Map<SettleKind, number>()
 
-  return applyCompetitionCap(bestPerFixture, config.maxPerCompetition).slice(
-    0,
-    config.legTarget,
-  )
+  const canPick = (leg: Leg): boolean => {
+    if (usedFixtures.has(fixtureKey(leg))) return false
+    if (
+      leg.settleKind === 'handicap' &&
+      (kindCounts.get('handicap') ?? 0) >= diversity.maxHandicap
+    ) {
+      return false
+    }
+    return true
+  }
+
+  const pick = (leg: Leg) => {
+    picked.push(leg)
+    usedFixtures.add(fixtureKey(leg))
+    kindCounts.set(leg.settleKind, (kindCounts.get(leg.settleKind) ?? 0) + 1)
+  }
+
+  const byScore = (legs: Leg[]) => [...legs].sort((a, b) => score(b) - score(a) || b.odds - a.odds)
+
+  // Phase 1: hit minimum counts per market type (TTS, O1.5, DC, etc.)
+  const minKinds = Object.entries(diversity.minByKind) as [SettleKind, number][]
+  for (const [kind, min] of minKinds) {
+    if (kind === 'handicap') continue
+    for (const leg of byScore(eligible.filter((l) => l.settleKind === kind))) {
+      if ((kindCounts.get(kind) ?? 0) >= min) break
+      if (!canPick(leg)) continue
+      pick(leg)
+    }
+  }
+
+  // Phase 2: fill remaining slots — best EV/payout, handicap capped
+  for (const leg of byScore(eligible)) {
+    if (picked.length >= config.legTarget) break
+    if (!canPick(leg)) continue
+    if (picked.some((p) => p.id === leg.id)) continue
+    pick(leg)
+  }
+
+  return applyCompetitionCap(picked, config.maxPerCompetition).slice(0, config.legTarget)
 }
 
 function buildTieredMixSlips(
@@ -139,7 +166,7 @@ function buildTieredMixSlips(
       marketId: 'mixed' as const,
       mixTier: config.tier,
       title: `MIX ${config.label} · ${legs.length}-fold`,
-      description: `${config.label} acca · ${config.rules.minProbability}%+ · odds ${config.rules.minOdds}+ · EV-scored. Hit ~${formatHitChance(hitChance)} · ${formatCombinedOdds(combined)}x · est. return ${evReturn.toFixed(1)} on stake ${stake} · avg @${avgOdds.toFixed(2)}`,
+      description: `${config.label} mix · TTS/O1.5/DC/AH/1X2 · EV-scored. Hit ~${formatHitChance(hitChance)} · ${formatCombinedOdds(combined)}x · est. return ${evReturn.toFixed(1)} on stake ${stake} · avg @${avgOdds.toFixed(2)}`,
       createdAt,
       weekKey,
       stake,
