@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { MARKETS } from '../data/markets'
 import type { Leg, LegResult, Slip } from '../types'
 import { potentialReturn, slipLegSummary } from '../lib/stats'
+import { valueEdge, valueScore } from '../lib/value'
 
 function formatKickoff(iso: string) {
   const d = new Date(iso)
@@ -76,11 +77,15 @@ export function SlipPanel({ slip, onSetResult }: Props) {
     slip.marketId === 'straight_win' || slip.marketId === 'mixed'
   const groups = useMemo(() => {
     if (sortByProb) {
-      const sorted = [...slip.legs].sort((a, b) => b.probability - a.probability)
+      const sorted = [...slip.legs].sort(
+        (a, b) =>
+          valueScore(b.probability, b.odds) - valueScore(a.probability, a.odds) ||
+          b.odds - a.odds,
+      )
       const label =
         slip.marketId === 'straight_win'
-          ? '1X2 favourites (80%+)'
-          : 'Quality mix · 1X2 + DC (85%+)'
+          ? 'Value 1X2 · sorted by edge'
+          : 'Value mix · best edge per fixture'
       return [{ competition: label, legs: sorted }]
     }
     return groupLegsByCompetition(slip.legs)
@@ -107,7 +112,12 @@ export function SlipPanel({ slip, onSetResult }: Props) {
         ).toFixed(0)}
         %
         {sortByProb
-          ? ` · sorted high→low · min ${Math.min(...slip.legs.map((l) => l.probability))}%`
+          ? ` · sorted by value · min edge ${(
+              (Math.min(...slip.legs.map((l) => valueEdge(l.probability, l.odds))) - 1) *
+              100
+            ).toFixed(0)}% · avg odds ${(
+              slip.legs.reduce((s, l) => s + l.odds, 0) / Math.max(1, slip.legs.length)
+            ).toFixed(2)}`
           : ` · ${groups.length} competitions`}
       </p>
 
@@ -169,6 +179,9 @@ function LegRow({
           <span>{formatKickoff(leg.kickoff)}</span>
           <span>{leg.probability}%</span>
           <span className="leg-odds">@{leg.odds?.toFixed(2) ?? '—'}</span>
+          {showCompetition && (
+            <span>edge +{((valueEdge(leg.probability, leg.odds) - 1) * 100).toFixed(0)}%</span>
+          )}
         </div>
       </div>
       <div className="leg-actions">

@@ -210,9 +210,8 @@ export default function App() {
               Lotto<span>Slips</span>
             </h1>
             <p>
-              Weekly card aimed at quality multibets: short-priced 1X2 favourites + DC across
-              many leagues. FT scores settle TTS / O1.5 / U4.5 / DC / SW. Skip TTS if no Over 0.5
-              market.
+              Weekly value multibets: confident legs with real odds upside (not crushed bankers).
+              SW and MIX sort by value edge. FT scores settle TTS / O1.5 / U4.5 / DC / SW.
             </p>
           </div>
           <div className="hero-actions">
