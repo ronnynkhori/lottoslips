@@ -210,8 +210,8 @@ export default function App() {
               Lotto<span>Slips</span>
             </h1>
             <p>
-              Weekly value multibets: confident legs with real odds upside (not crushed bankers).
-              SW and MIX sort by value edge. FT scores settle TTS / O1.5 / U4.5 / DC / SW.
+              Weekly value multibets with Asian handicap legs for bigger payouts. MIX prioritises
+              AH + juicy prices. FT scores settle TTS / O1.5 / U4.5 / DC / AH / SW.
             </p>
           </div>
           <div className="hero-actions">
@@ -270,7 +270,7 @@ export default function App() {
           <div className="panel-head">
             <h2>{week?.label ?? 'Active week'}</h2>
             <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>
-              {primarySlips.length}/6 slips · card v{card.cardVersion || CARD_VERSION}
+              {primarySlips.length}/7 slips · card v{card.cardVersion || CARD_VERSION}
               {cardLoading ? ' · loading…' : ''}
             </span>
           </div>

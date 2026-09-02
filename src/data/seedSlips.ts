@@ -9,6 +9,7 @@ import type {
 import {
   MIX_VALUE_RULES,
   SW_VALUE_RULES,
+  mixPayoutScore,
   passesValueRules,
   valueEdge,
   valueScore,
@@ -36,6 +37,8 @@ function toLeg(draft: CardLegDraft): Leg {
     scoringSide: draft.scoringSide,
     winSide: draft.winSide,
     dcSide: draft.dcSide,
+    handicapLine: draft.handicapLine,
+    handicapSide: draft.handicapSide,
     result: 'pending',
   }
 }
@@ -70,30 +73,51 @@ function dedupeOnePerFixture(legs: Leg[]): Leg[] {
   return out
 }
 
-/** Pool every market on the card and keep legs that pay better than their implied chance */
+function dedupeBestPerFixture(legs: Leg[], scoreFn: (leg: Leg) => number): Leg[] {
+  const map = new Map<string, Leg>()
+  for (const leg of legs) {
+    const key = fixtureKey(leg)
+    const existing = map.get(key)
+    if (!existing || scoreFn(leg) > scoreFn(existing)) {
+      map.set(key, leg)
+    }
+  }
+  return [...map.values()]
+}
+
+/** Pool every market on the card — prioritise handicap + juicy prices for MIX */
 function buildValueMixSlip(card: WeeklyCard, stake: number, createdAt: string): Slip | null {
-  const pool = MARKET_ORDER.flatMap((marketId) => {
+  const pool = MARKET_ORDER.filter((id) => id !== 'mixed').flatMap((marketId) => {
     const draft = card.markets[marketId]
     if (!draft?.legs?.length) return []
     return draft.legs.map(toLeg)
   })
 
-  const legs = dedupeOnePerFixture(
-    pool
-      .filter((l) => passesValueRules(l.probability, l.odds, MIX_VALUE_RULES))
-      .sort(sortByValueThenKickoff),
-  ).slice(0, 25)
+  const score = (leg: Leg) => mixPayoutScore(leg.probability, leg.odds, leg.settleKind)
+
+  const eligible = pool.filter((l) => passesValueRules(l.probability, l.odds, MIX_VALUE_RULES))
+
+  const bestPerFixture = dedupeBestPerFixture(eligible, score).sort(
+    (a, b) => score(b) - score(a) || b.odds - a.odds,
+  )
+
+  const handicapFirst = [
+    ...bestPerFixture.filter((l) => l.settleKind === 'handicap'),
+    ...bestPerFixture.filter((l) => l.settleKind !== 'handicap'),
+  ]
+  const legs = dedupeOnePerFixture(handicapFirst).slice(0, 22)
 
   if (!legs.length) return null
 
   const avgOdds = legs.reduce((s, l) => s + l.odds, 0) / legs.length
   const combined = legs.reduce((s, l) => s * l.odds, 1)
+  const hcCount = legs.filter((l) => l.settleKind === 'handicap').length
 
   return {
     id: crypto.randomUUID(),
     marketId: 'mixed',
-    title: `Value mix · ${legs.length}-fold`,
-    description: `High-confidence legs with juice (72%+ · odds 1.25+ · value edge). Avg leg @${avgOdds.toFixed(2)} · combined ~${combined.toFixed(0)}x`,
+    title: `Payout mix · ${legs.length}-fold`,
+    description: `Handicap-heavy value acca (${hcCount} AH legs · 68%+ · odds 1.38+). Avg @${avgOdds.toFixed(2)} · combined ~${combined >= 1000 ? `${(combined / 1000).toFixed(1)}k` : combined.toFixed(0)}x`,
     createdAt,
     weekKey: card.weekKey,
     stake,
