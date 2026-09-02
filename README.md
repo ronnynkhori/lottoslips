@@ -2,11 +2,14 @@
 
 Multi-market lotto slip tracker: TTS, O1.5, U4.5, DC, Straight Win, and Mixed quality folds.
 
-## Live app (permanent)
+## Live app
 
-**https://ronnynkhori.github.io/lottoslips/**
+| Host | URL | Deploy |
+|------|-----|--------|
+| GitHub Pages | **https://ronnynkhori.github.io/lottoslips/** | `npm run deploy` or gh-pages branch |
+| Vercel | Your `*.vercel.app` URL from the Vercel dashboard | Auto on every push to `main` |
 
-Hosted from the `gh-pages` branch — does not expire.
+Both hosts use the same repo — Vercel builds with `npm run build` (root path); Pages uses `npm run build:pages` (`/lottoslips/` base).
 
 ## Deploy after changes
 
@@ -24,11 +27,11 @@ GitHub blocks workflow files from this agent token. Enable it once in your brows
 
 Every future push to `main` will auto-deploy to Pages.
 
-## Permanent Vercel URL (recommended)
+## Vercel (linked to GitHub)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fronnynkhori%2Flottoslips&project-name=lottoslips&framework=vite&build-command=npm%20run%20build&output-directory=dist)
+Repo is linked — every push to `main` triggers a Vercel production deploy. Check your project URL in the [Vercel dashboard](https://vercel.com/dashboard).
 
-Or manually: [vercel.com/new](https://vercel.com/new) → Import **ronnynkhori/lottoslips** → Build `npm run build` → Output `dist`.
+Not linked yet? [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fronnynkhori%2Flottoslips&project-name=lottoslips&framework=vite&build-command=npm%20run%20build&output-directory=dist)
 
 ## Local dev
 

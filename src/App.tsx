@@ -24,10 +24,18 @@ import {
 import type { AppState, LegResult, MarketId } from './types'
 import './index.css'
 
+const GITHUB_PAGES_URL = 'https://ronnynkhori.github.io/lottoslips/'
+
 export default function App() {
   const [state, setState] = useState<AppState>(() => ensureActiveWeek(loadState()))
   const [activeMarket, setActiveMarket] = useState<MarketId>('team_to_score')
   const [dismissedRebets, setDismissedRebets] = useState<string[]>([])
+  const liveUrl = useMemo(() => {
+    if (typeof window === 'undefined') return GITHUB_PAGES_URL
+    return window.location.hostname.endsWith('vercel.app')
+      ? `${window.location.origin}/`
+      : GITHUB_PAGES_URL
+  }, [])
   const [flash, setFlash] = useState<string | null>(null)
   const [cardLoading, setCardLoading] = useState(true)
 
@@ -347,8 +355,8 @@ export default function App() {
 
       <p className="footer-note">
         Live:{' '}
-        <a href="https://ronnynkhori.github.io/lottoslips/" target="_blank" rel="noreferrer">
-          ronnynkhori.github.io/lottoslips
+        <a href={liveUrl} target="_blank" rel="noreferrer">
+          {liveUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}
         </a>
         {' · '}
         Card v{card.cardVersion || CARD_VERSION}. <strong>Reload fixtures</strong> after card
