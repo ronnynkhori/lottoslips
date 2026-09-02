@@ -67,6 +67,16 @@ function buildUnderdogCover(leg) {
 
 function boostForMix(leg, marketId) {
   const next = { ...leg }
+  if (marketId === 'over_1_5') {
+    next.odds = Math.max(leg.odds, 1.36)
+    return next
+  }
+
+  if (marketId === 'under_4_5') {
+    next.odds = Math.max(leg.odds, 1.3)
+    return next
+  }
+
   if (marketId === 'team_to_score') {
     next.odds = Math.max(next.odds, 1.38)
   }
@@ -87,8 +97,8 @@ function main() {
 
   for (const path of paths) {
     const card = JSON.parse(readFileSync(path, 'utf8'))
-    card.cardVersion = 16
-    card.label = 'Week 36 · handicap + payout mix card'
+    card.cardVersion = 18
+    card.label = 'Week 36 · diversified MIX card'
     card.updatedAt = new Date().toISOString()
 
     const swLegs = card.markets.straight_win?.legs ?? []
@@ -96,8 +106,8 @@ function main() {
 
     const favHandicaps = swLegs.map(buildHandicapFromWin)
     const underdogCovers = ttsLegs
-      .filter((_, i) => i % 4 === 0)
-      .slice(0, 8)
+      .filter((_, i) => i % 6 === 0)
+      .slice(0, 4)
       .map(buildUnderdogCover)
 
     const seen = new Set()

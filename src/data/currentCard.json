@@ -1,8 +1,8 @@
 {
-  "cardVersion": 17,
+  "cardVersion": 18,
   "weekKey": "2026-W36",
-  "label": "Week 36 · tiered MIX EV card",
-  "updatedAt": "2026-09-02T11:04:11.255Z",
+  "label": "Week 36 · diversified MIX card",
+  "updatedAt": "2026-09-02T11:54:25.186Z",
   "markets": {
     "team_to_score": {
       "title": "Underdog TTS · 30-fold",
@@ -351,7 +351,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -361,7 +361,7 @@
           "competition": "La Liga",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -371,7 +371,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -381,7 +381,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -391,7 +391,7 @@
           "competition": "La Liga",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -401,7 +401,7 @@
           "competition": "La Liga",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -411,7 +411,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 87,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -421,7 +421,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 86,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -431,7 +431,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 86,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -441,7 +441,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 85,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -451,7 +451,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 85,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -461,7 +461,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 84,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -471,7 +471,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 84,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -481,7 +481,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 83,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -491,7 +491,7 @@
           "competition": "La Liga",
           "selection": "Over 1.5",
           "probability": 82,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -501,7 +501,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 86,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -511,7 +511,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 85,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -521,7 +521,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -531,7 +531,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -541,7 +541,7 @@
           "competition": "Premier League",
           "selection": "Over 1.5",
           "probability": 84,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -551,7 +551,7 @@
           "competition": "EFL Cup",
           "selection": "Over 1.5",
           "probability": 86,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -561,7 +561,7 @@
           "competition": "EFL Cup",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -571,7 +571,7 @@
           "competition": "EFL Cup",
           "selection": "Over 1.5",
           "probability": 82,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -581,7 +581,7 @@
           "competition": "Saudi Pro League",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -591,7 +591,7 @@
           "competition": "Saudi Pro League",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -601,7 +601,7 @@
           "competition": "UCL",
           "selection": "Over 1.5",
           "probability": 87,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -611,7 +611,7 @@
           "competition": "UCL",
           "selection": "Over 1.5",
           "probability": 88,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -621,7 +621,7 @@
           "competition": "UCL",
           "selection": "Over 1.5",
           "probability": 84,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -631,7 +631,7 @@
           "competition": "FA Cup",
           "selection": "Over 1.5",
           "probability": 83,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         },
         {
@@ -641,7 +641,7 @@
           "competition": "FA Cup",
           "selection": "Over 1.5",
           "probability": 82,
-          "odds": 1.35,
+          "odds": 1.36,
           "settleKind": "over_1_5"
         }
       ]
@@ -657,7 +657,7 @@
           "competition": "La Liga",
           "selection": "Under 4.5",
           "probability": 92,
-          "odds": 1.18,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -667,7 +667,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 90,
-          "odds": 1.18,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -677,7 +677,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 89,
-          "odds": 1.18,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -687,7 +687,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 88,
-          "odds": 1.18,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -697,7 +697,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 87,
-          "odds": 1.2,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -707,7 +707,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 87,
-          "odds": 1.2,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -717,7 +717,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 86,
-          "odds": 1.22,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -727,7 +727,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 86,
-          "odds": 1.22,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -737,7 +737,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 86,
-          "odds": 1.22,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -747,7 +747,7 @@
           "competition": "La Liga",
           "selection": "Under 4.5",
           "probability": 85,
-          "odds": 1.24,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -757,7 +757,7 @@
           "competition": "La Liga",
           "selection": "Under 4.5",
           "probability": 84,
-          "odds": 1.26,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -767,7 +767,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 84,
-          "odds": 1.26,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -777,7 +777,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 88,
-          "odds": 1.18,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -787,7 +787,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 88,
-          "odds": 1.18,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -797,7 +797,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 87,
-          "odds": 1.2,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -807,7 +807,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 86,
-          "odds": 1.22,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -817,7 +817,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 85,
-          "odds": 1.24,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -827,7 +827,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 87,
-          "odds": 1.2,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -837,7 +837,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 86,
-          "odds": 1.22,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -847,7 +847,7 @@
           "competition": "Premier League",
           "selection": "Under 4.5",
           "probability": 85,
-          "odds": 1.24,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -857,7 +857,7 @@
           "competition": "EFL Cup",
           "selection": "Under 4.5",
           "probability": 88,
-          "odds": 1.18,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -867,7 +867,7 @@
           "competition": "EFL Cup",
           "selection": "Under 4.5",
           "probability": 86,
-          "odds": 1.22,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -877,7 +877,7 @@
           "competition": "Saudi Pro League",
           "selection": "Under 4.5",
           "probability": 85,
-          "odds": 1.24,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -897,7 +897,7 @@
           "competition": "UCL",
           "selection": "Under 4.5",
           "probability": 86,
-          "odds": 1.22,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -907,7 +907,7 @@
           "competition": "UCL",
           "selection": "Under 4.5",
           "probability": 87,
-          "odds": 1.2,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -917,7 +917,7 @@
           "competition": "FA Cup",
           "selection": "Under 4.5",
           "probability": 90,
-          "odds": 1.18,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         },
         {
@@ -927,7 +927,7 @@
           "competition": "FA Cup",
           "selection": "Under 4.5",
           "probability": 88,
-          "odds": 1.18,
+          "odds": 1.3,
           "settleKind": "under_4_5"
         }
       ]
@@ -1539,8 +1539,8 @@
       ]
     },
     "mixed": {
-      "title": "MIX tiers (auto-built)",
-      "description": "Safe / Value / Moonshot built at load — EV-scored with hit chance shown.",
+      "title": "Payout mix (auto-built)",
+      "description": "Built at load — handicap-heavy, 68%+ at 1.38+ odds, best payout per fixture.",
       "legs": [
         {
           "kickoff": "2026-09-05T14:00:00Z",
@@ -1820,7 +1820,7 @@
       ]
     },
     "handicap": {
-      "title": "Asian Handicap · 32-fold",
+      "title": "Asian Handicap · 28-fold",
       "description": "Favourite -1 / -1.5 and underdog +1.5 covers. Higher odds than outright wins, still solid hit rates.",
       "legs": [
         {
@@ -2125,26 +2125,14 @@
         },
         {
           "kickoff": "2026-09-05T14:00:00Z",
-          "home": "Brighton",
-          "away": "Leeds",
+          "home": "Fulham",
+          "away": "Crystal Palace",
           "competition": "Premier League",
-          "selection": "Leeds +1.5",
-          "probability": 75,
-          "odds": 1.61,
+          "selection": "Crystal Palace +1.5",
+          "probability": 74,
+          "odds": 1.64,
           "settleKind": "handicap",
           "handicapSide": "away",
-          "handicapLine": 1.5
-        },
-        {
-          "kickoff": "2026-08-31T19:00:00Z",
-          "home": "Aston Villa",
-          "away": "Arsenal",
-          "competition": "Premier League",
-          "selection": "Aston Villa +1.5",
-          "probability": 76,
-          "odds": 1.58,
-          "settleKind": "handicap",
-          "handicapSide": "home",
           "handicapLine": 1.5
         },
         {
@@ -2160,51 +2148,15 @@
           "handicapLine": 1.5
         },
         {
-          "kickoff": "2026-09-12T16:30:00Z",
-          "home": "Tottenham",
-          "away": "Everton",
+          "kickoff": "2026-09-12T14:00:00Z",
+          "home": "Chelsea",
+          "away": "Hull",
           "competition": "Premier League",
-          "selection": "Everton +1.5",
-          "probability": 73,
-          "odds": 1.66,
+          "selection": "Hull +1.5",
+          "probability": 68,
+          "odds": 1.81,
           "settleKind": "handicap",
           "handicapSide": "away",
-          "handicapLine": 1.5
-        },
-        {
-          "kickoff": "2026-09-02T18:45:00Z",
-          "home": "Leicester",
-          "away": "Aston Villa",
-          "competition": "EFL Cup",
-          "selection": "Leicester +1.5",
-          "probability": 72,
-          "odds": 1.69,
-          "settleKind": "handicap",
-          "handicapSide": "home",
-          "handicapLine": 1.5
-        },
-        {
-          "kickoff": "2026-09-02T16:00:00Z",
-          "home": "Al Ittihad",
-          "away": "Al Ahli",
-          "competition": "Saudi Pro League",
-          "selection": "Al Ahli +1.5",
-          "probability": 74,
-          "odds": 1.64,
-          "settleKind": "handicap",
-          "handicapSide": "away",
-          "handicapLine": 1.5
-        },
-        {
-          "kickoff": "2026-09-16T16:45:00Z",
-          "home": "Galatasaray",
-          "away": "Atletico Madrid",
-          "competition": "UCL",
-          "selection": "Galatasaray +1.5",
-          "probability": 72,
-          "odds": 1.69,
-          "settleKind": "handicap",
-          "handicapSide": "home",
           "handicapLine": 1.5
         }
       ]
