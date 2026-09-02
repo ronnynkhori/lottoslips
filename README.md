@@ -6,7 +6,15 @@ Multi-market lotto slip tracker: TTS, O1.5, U4.5, DC, Straight Win, and Mixed qu
 
 **https://ronnynkhori.github.io/lottoslips/**
 
-Every push to `main` auto-deploys via GitHub Actions → `gh-pages` branch.
+Hosted from the `gh-pages` branch on this repo (does not expire).
+
+After you change code on `main`, redeploy with:
+
+```bash
+npm run deploy:pages
+```
+
+Or connect **Vercel** (below) for automatic deploy on every push.
 
 ## Local dev
 
