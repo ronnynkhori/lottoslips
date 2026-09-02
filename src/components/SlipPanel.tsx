@@ -1,8 +1,17 @@
 import { useMemo } from 'react'
 import { MARKETS } from '../data/markets'
+import { MIX_TIER_CONFIGS } from '../lib/value'
 import type { Leg, LegResult, Slip } from '../types'
-import { potentialReturn, slipLegSummary } from '../lib/stats'
-import { valueEdge, mixPayoutScore } from '../lib/value'
+import {
+  accaCombinedOdds,
+  accaExpectedReturn,
+  accaHitProbability,
+  formatCombinedOdds,
+  formatHitChance,
+  potentialReturn,
+  slipLegSummary,
+} from '../lib/stats'
+import { mixTierScore, valueEdge } from '../lib/value'
 
 function formatKickoff(iso: string) {
   const d = new Date(iso)
@@ -73,26 +82,54 @@ export function SlipPanel({ slip, onSetResult }: Props) {
   const meta = MARKETS[slip.marketId]
   const summary = slipLegSummary(slip)
   const estReturn = potentialReturn(slip)
-  const sortByProb =
-    slip.marketId === 'straight_win' || slip.marketId === 'mixed'
+  const isValueSorted = slip.marketId === 'straight_win' || slip.marketId === 'mixed'
+  const tierConfig = MIX_TIER_CONFIGS.find((c) => c.tier === slip.mixTier)
+  const hitChance = accaHitProbability(slip.legs)
+  const combined = accaCombinedOdds(slip.legs)
+  const evReturn = accaExpectedReturn(slip.legs, slip.stake)
+
   const groups = useMemo(() => {
-    if (sortByProb) {
+    if (isValueSorted) {
+      const payoutBias = tierConfig?.payoutBias ?? 0.35
       const sorted = [...slip.legs].sort(
         (a, b) =>
-          mixPayoutScore(b.probability, b.odds, b.settleKind) -
-            mixPayoutScore(a.probability, a.odds, a.settleKind) || b.odds - a.odds,
+          mixTierScore(b.probability, b.odds, payoutBias) -
+            mixTierScore(a.probability, a.odds, payoutBias) || b.odds - a.odds,
       )
       const label =
         slip.marketId === 'straight_win'
           ? 'Value 1X2 · sorted by edge'
-          : 'Payout mix · handicap + value legs'
+          : `${tierConfig?.label ?? 'MIX'} · EV-scored legs`
       return [{ competition: label, legs: sorted }]
     }
     return groupLegsByCompetition(slip.legs)
-  }, [slip.legs, sortByProb, slip.marketId])
+  }, [slip.legs, isValueSorted, slip.marketId, tierConfig])
 
   return (
     <div>
+      {slip.mixTier && (
+        <div className="acca-ev-banner">
+          <div>
+            <span className="acca-ev-label">Hit chance</span>
+            <strong>{formatHitChance(hitChance)}</strong>
+          </div>
+          <div>
+            <span className="acca-ev-label">Combined</span>
+            <strong>{formatCombinedOdds(combined)}x</strong>
+          </div>
+          <div>
+            <span className="acca-ev-label">EV return</span>
+            <strong>
+              ~{evReturn.toFixed(1)} <small>(stake {slip.stake})</small>
+            </strong>
+          </div>
+          <div>
+            <span className="acca-ev-label">If all win</span>
+            <strong>~{estReturn}</strong>
+          </div>
+        </div>
+      )}
+
       <div className="slip-meta">
         <span className={`pill ${summary.dead ? 'dead' : summary.fullHit ? 'ok' : 'open'}`}>
           {summary.dead ? 'DEAD' : summary.fullHit ? 'HIT' : 'OPEN'}
@@ -111,8 +148,8 @@ export function SlipPanel({ slip, onSetResult }: Props) {
           slip.legs.reduce((s, l) => s + l.probability, 0) / Math.max(1, slip.legs.length)
         ).toFixed(0)}
         %
-        {sortByProb
-          ? ` · sorted by value · min edge ${(
+        {isValueSorted
+          ? ` · min edge ${(
               (Math.min(...slip.legs.map((l) => valueEdge(l.probability, l.odds))) - 1) *
               100
             ).toFixed(0)}% · avg odds ${(
@@ -134,7 +171,7 @@ export function SlipPanel({ slip, onSetResult }: Props) {
                   key={leg.id}
                   leg={leg}
                   accent={meta.color}
-                  showCompetition={sortByProb}
+                  showCompetition={isValueSorted}
                   onSetResult={(result) => onSetResult(leg.id, result)}
                 />
               ))}

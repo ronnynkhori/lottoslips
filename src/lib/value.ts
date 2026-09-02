@@ -1,3 +1,5 @@
+import type { MixTier } from '../types'
+
 /** Bookmaker implied win chance from decimal odds */
 export function impliedProbability(odds: number): number {
   if (odds <= 1) return 100
@@ -37,16 +39,53 @@ export const MIX_VALUE_RULES: ValuePickRules = {
   maxOdds: 2.45,
 }
 
-/** Favour juicier MIX legs — handicaps and higher prices score higher */
-export function mixPayoutScore(
+export type MixTierConfig = {
+  tier: MixTier
+  label: string
+  legTarget: number
+  rules: ValuePickRules
+  maxPerCompetition: number
+  /** 0 = pure EV, 1 = max payout bias */
+  payoutBias: number
+}
+
+export const MIX_TIER_CONFIGS: MixTierConfig[] = [
+  {
+    tier: 'safe',
+    label: 'Safe',
+    legTarget: 12,
+    rules: { minProbability: 74, minOdds: 1.32, minEdge: 1.03, maxOdds: 1.58 },
+    maxPerCompetition: 3,
+    payoutBias: 0,
+  },
+  {
+    tier: 'value',
+    label: 'Value',
+    legTarget: 16,
+    rules: { minProbability: 70, minOdds: 1.36, minEdge: 1.02, maxOdds: 1.78 },
+    maxPerCompetition: 4,
+    payoutBias: 0.35,
+  },
+  {
+    tier: 'moonshot',
+    label: 'Moonshot',
+    legTarget: 20,
+    rules: { minProbability: 66, minOdds: 1.42, minEdge: 1.02, maxOdds: 2.45 },
+    maxPerCompetition: 5,
+    payoutBias: 0.7,
+  },
+]
+
+/** Score leg for MIX tier — blends EV with payout juice based on tier */
+export function mixTierScore(
   probability: number,
   odds: number,
-  settleKind?: string,
+  payoutBias: number,
 ): number {
   const edge = valueEdge(probability, odds)
-  const juice = odds - 1
-  const kindBoost = settleKind === 'handicap' ? 1.35 : settleKind === 'straight_win' ? 1.1 : 1
-  return edge * (1 + juice * 0.65) * kindBoost
+  const evScore = edge
+  const payoutScore = edge * (1 + (odds - 1) * 0.65)
+  return evScore * (1 - payoutBias) + payoutScore * payoutBias
 }
 
 export function handicapOddsFromProbability(

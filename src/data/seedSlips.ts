@@ -7,17 +7,26 @@ import type {
   WeeklyCard,
 } from '../types'
 import {
-  MIX_VALUE_RULES,
+  MIX_TIER_CONFIGS,
   SW_VALUE_RULES,
-  mixPayoutScore,
+  mixTierScore,
   passesValueRules,
   valueEdge,
   valueScore,
+  type MixTierConfig,
 } from '../lib/value'
+import {
+  accaCombinedOdds,
+  accaExpectedReturn,
+  accaHitProbability,
+  formatCombinedOdds,
+  formatHitChance,
+} from '../lib/stats'
 import fallbackCard from './currentCard.json'
 import { MARKET_ORDER } from './markets'
 
 export { CARD_VERSION, MARKETS, MARKET_ORDER } from './markets'
+export { MIX_TIER_CONFIGS } from '../lib/value'
 export type { WeeklyCard }
 
 const CARD_URL = `${import.meta.env.BASE_URL}cards/current.json`
@@ -61,18 +70,6 @@ function sortByValueThenKickoff(a: Leg, b: Leg): number {
   )
 }
 
-function dedupeOnePerFixture(legs: Leg[]): Leg[] {
-  const seen = new Set<string>()
-  const out: Leg[] = []
-  for (const leg of legs) {
-    const key = fixtureKey(leg)
-    if (seen.has(key)) continue
-    seen.add(key)
-    out.push(leg)
-  }
-  return out
-}
-
 function dedupeBestPerFixture(legs: Leg[], scoreFn: (leg: Leg) => number): Leg[] {
   const map = new Map<string, Leg>()
   for (const leg of legs) {
@@ -85,45 +82,71 @@ function dedupeBestPerFixture(legs: Leg[], scoreFn: (leg: Leg) => number): Leg[]
   return [...map.values()]
 }
 
-/** Pool every market on the card — prioritise handicap + juicy prices for MIX */
-function buildValueMixSlip(card: WeeklyCard, stake: number, createdAt: string): Slip | null {
-  const pool = MARKET_ORDER.filter((id) => id !== 'mixed').flatMap((marketId) => {
+function applyCompetitionCap(legs: Leg[], maxPerCompetition: number): Leg[] {
+  const counts = new Map<string, number>()
+  const out: Leg[] = []
+  for (const leg of legs) {
+    const comp = leg.competition?.trim() || 'Other'
+    const n = counts.get(comp) ?? 0
+    if (n >= maxPerCompetition) continue
+    counts.set(comp, n + 1)
+    out.push(leg)
+  }
+  return out
+}
+
+function buildMixPool(card: WeeklyCard): Leg[] {
+  return MARKET_ORDER.filter((id) => id !== 'mixed').flatMap((marketId) => {
     const draft = card.markets[marketId]
     if (!draft?.legs?.length) return []
     return draft.legs.map(toLeg)
   })
+}
 
-  const score = (leg: Leg) => mixPayoutScore(leg.probability, leg.odds, leg.settleKind)
+function selectMixLegs(pool: Leg[], config: MixTierConfig): Leg[] {
+  const score = (leg: Leg) =>
+    mixTierScore(leg.probability, leg.odds, config.payoutBias)
 
-  const eligible = pool.filter((l) => passesValueRules(l.probability, l.odds, MIX_VALUE_RULES))
+  const eligible = pool.filter((l) => passesValueRules(l.probability, l.odds, config.rules))
 
   const bestPerFixture = dedupeBestPerFixture(eligible, score).sort(
     (a, b) => score(b) - score(a) || b.odds - a.odds,
   )
 
-  const handicapFirst = [
-    ...bestPerFixture.filter((l) => l.settleKind === 'handicap'),
-    ...bestPerFixture.filter((l) => l.settleKind !== 'handicap'),
-  ]
-  const legs = dedupeOnePerFixture(handicapFirst).slice(0, 22)
+  return applyCompetitionCap(bestPerFixture, config.maxPerCompetition).slice(
+    0,
+    config.legTarget,
+  )
+}
 
-  if (!legs.length) return null
+function buildTieredMixSlips(
+  card: WeeklyCard,
+  pool: Leg[],
+  stake: number,
+  createdAt: string,
+): Slip[] {
+  const weekKey = card.weekKey
 
-  const avgOdds = legs.reduce((s, l) => s + l.odds, 0) / legs.length
-  const combined = legs.reduce((s, l) => s * l.odds, 1)
-  const hcCount = legs.filter((l) => l.settleKind === 'handicap').length
+  return MIX_TIER_CONFIGS.map((config) => {
+    const legs = selectMixLegs(pool, config)
+    const hitChance = accaHitProbability(legs)
+    const combined = accaCombinedOdds(legs)
+    const evReturn = accaExpectedReturn(legs, stake)
+    const avgOdds = legs.reduce((s, l) => s + l.odds, 0) / Math.max(1, legs.length)
 
-  return {
-    id: crypto.randomUUID(),
-    marketId: 'mixed',
-    title: `Payout mix · ${legs.length}-fold`,
-    description: `Handicap-heavy value acca (${hcCount} AH legs · 68%+ · odds 1.38+). Avg @${avgOdds.toFixed(2)} · combined ~${combined >= 1000 ? `${(combined / 1000).toFixed(1)}k` : combined.toFixed(0)}x`,
-    createdAt,
-    weekKey: card.weekKey,
-    stake,
-    status: 'open',
-    legs,
-  }
+    return {
+      id: crypto.randomUUID(),
+      marketId: 'mixed' as const,
+      mixTier: config.tier,
+      title: `MIX ${config.label} · ${legs.length}-fold`,
+      description: `${config.label} acca · ${config.rules.minProbability}%+ · odds ${config.rules.minOdds}+ · EV-scored. Hit ~${formatHitChance(hitChance)} · ${formatCombinedOdds(combined)}x · est. return ${evReturn.toFixed(1)} on stake ${stake} · avg @${avgOdds.toFixed(2)}`,
+      createdAt,
+      weekKey,
+      stake,
+      status: 'open' as const,
+      legs,
+    }
+  }).filter((s) => s.legs.length > 0)
 }
 
 export function createSlipsFromCard(card: WeeklyCard, stake: number): Slip[] {
@@ -167,8 +190,9 @@ export function createSlipsFromCard(card: WeeklyCard, stake: number): Slip[] {
     return [slip]
   })
 
-  const mix = buildValueMixSlip(card, stake, createdAt)
-  return mix ? [...standard, mix] : standard
+  const mixPool = buildMixPool(card)
+  const mixSlips = buildTieredMixSlips(card, mixPool, stake, createdAt)
+  return [...standard, ...mixSlips]
 }
 
 export function createWeekBundleFromCard(card: WeeklyCard, stake = 1): WeekBundle {

@@ -7,6 +7,8 @@ export type MarketId =
   | 'straight_win'
   | 'mixed'
 
+export type MixTier = 'safe' | 'value' | 'moonshot'
+
 export type LegResult = 'pending' | 'won' | 'lost' | 'void'
 
 export type DoubleChanceSide = '1X' | 'X2' | '12'
@@ -66,6 +68,8 @@ export interface Slip {
   legs: Leg[]
   /** If this slip was created as a rebet of another */
   rebetOf?: string
+  /** MIX tier when marketId is mixed */
+  mixTier?: MixTier
   status: 'open' | 'settled'
 }
 
