@@ -46,6 +46,33 @@ export function estimateCombinedOdds(legs: Leg[]): number {
   }, 1)
 }
 
+export function accaHitProbability(legs: Leg[]): number {
+  if (!legs.length) return 0
+  return legs.reduce((p, l) => p * (l.probability / 100), 1) * 100
+}
+
+export function accaCombinedOdds(legs: Leg[]): number {
+  return legs.reduce((o, l) => o * legOdds(l), 1)
+}
+
+/** Expected return if probability estimates are accurate */
+export function accaExpectedReturn(legs: Leg[], stake: number): number {
+  const hitProb = legs.reduce((p, l) => p * (l.probability / 100), 1)
+  return hitProb * accaCombinedOdds(legs) * stake
+}
+
+export function formatHitChance(percent: number): string {
+  if (percent >= 1) return `${percent.toFixed(1)}%`
+  if (percent >= 0.01) return `${percent.toFixed(2)}%`
+  return `${percent.toFixed(3)}%`
+}
+
+export function formatCombinedOdds(n: number): string {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}k`
+  return n.toFixed(0)
+}
+
 export function potentialReturn(slip: Slip): number {
   if (slip.legs.some((l) => l.result === 'lost')) return 0
   const active = slip.legs.filter((l) => l.result === 'pending' || l.result === 'won')

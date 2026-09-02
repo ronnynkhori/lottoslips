@@ -1,4 +1,4 @@
-import type { AppState, Slip, WeekBundle, WeeklyCard } from '../types'
+import type { AppState, Slip, WeekBundle, WeeklyCard, MixTier } from '../types'
 import {
   CARD_VERSION,
   createWeekBundle,
@@ -8,7 +8,21 @@ import {
 } from '../data/seedSlips'
 import { MARKET_ORDER } from '../data/markets'
 
-const STORAGE_KEY = 'lotto-slips-v16'
+const MIX_TIERS: MixTier[] = ['safe', 'value', 'moonshot']
+
+function hasPrimarySlipsForWeek(slips: Slip[] | undefined): boolean {
+  if (!slips?.length) return false
+  return MARKET_ORDER.every((id) => {
+    if (id === 'mixed') {
+      return MIX_TIERS.every((tier) =>
+        slips.some((s) => s.marketId === 'mixed' && s.mixTier === tier && !s.rebetOf),
+      )
+    }
+    return slips.some((s) => s.marketId === id && !s.rebetOf)
+  })
+}
+
+const STORAGE_KEY = 'lotto-slips-v17'
 
 let activeCard: WeeklyCard = getFallbackCard()
 
@@ -47,9 +61,7 @@ export function loadState(): AppState {
 export function migrateIfStale(state: AppState, card: WeeklyCard = activeCard): AppState {
   const targetVersion = Math.max(CARD_VERSION, card.cardVersion)
   const active = state.weeks.find((w) => w.weekKey === state.activeWeekKey) ?? state.weeks[0]
-  const hasAllMarkets = MARKET_ORDER.every((id) =>
-    active?.slips?.some((s) => s.marketId === id && !s.rebetOf),
-  )
+  const hasAllMarkets = hasPrimarySlipsForWeek(active?.slips)
   const stale =
     (state.cardVersion ?? 0) < targetVersion ||
     (active?.cardVersion ?? 0) < targetVersion ||

@@ -1,7 +1,7 @@
 {
-  "cardVersion": 16,
+  "cardVersion": 17,
   "weekKey": "2026-W36",
-  "label": "Week 36 · handicap + payout mix card",
+  "label": "Week 36 · tiered MIX EV card",
   "updatedAt": "2026-09-02T11:04:11.259Z",
   "markets": {
     "team_to_score": {
@@ -1539,8 +1539,8 @@
       ]
     },
     "mixed": {
-      "title": "Payout mix (auto-built)",
-      "description": "Built at load — handicap-heavy, 68%+ at 1.38+ odds, best payout per fixture.",
+      "title": "MIX tiers (auto-built)",
+      "description": "Safe / Value / Moonshot built at load — EV-scored with hit chance shown.",
       "legs": [
         {
           "kickoff": "2026-09-05T14:00:00Z",

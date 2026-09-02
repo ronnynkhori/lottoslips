@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CARD_VERSION, MARKETS, MARKET_ORDER, loadWeeklyCard } from './data/seedSlips'
+import { CARD_VERSION, MARKETS, MARKET_ORDER, MIX_TIER_CONFIGS, loadWeeklyCard } from './data/seedSlips'
 import { SlipPanel } from './components/SlipPanel'
 import { RankingsPanel } from './components/RankingsPanel'
 import { RebetPanel } from './components/RebetPanel'
@@ -21,7 +21,7 @@ import {
   saveState,
   updateSlipInState,
 } from './lib/storage'
-import type { AppState, LegResult, MarketId } from './types'
+import type { AppState, LegResult, MarketId, MixTier } from './types'
 import './index.css'
 
 const GITHUB_PAGES_URL = 'https://ronnynkhori.github.io/lottoslips/'
@@ -29,6 +29,7 @@ const GITHUB_PAGES_URL = 'https://ronnynkhori.github.io/lottoslips/'
 export default function App() {
   const [state, setState] = useState<AppState>(() => ensureActiveWeek(loadState()))
   const [activeMarket, setActiveMarket] = useState<MarketId>('team_to_score')
+  const [activeMixTier, setActiveMixTier] = useState<MixTier>('value')
   const [dismissedRebets, setDismissedRebets] = useState<string[]>([])
   const liveUrl = useMemo(() => {
     if (typeof window === 'undefined') return GITHUB_PAGES_URL
@@ -76,9 +77,16 @@ export default function App() {
     [slips],
   )
 
+  const mixSlips = useMemo(
+    () => slips.filter((s) => s.marketId === 'mixed' && !s.rebetOf),
+    [slips],
+  )
+
   const activeSlip =
-    slips.find((s) => s.marketId === activeMarket && !s.rebetOf) ??
-    slips.find((s) => s.marketId === activeMarket)
+    activeMarket === 'mixed'
+      ? (mixSlips.find((s) => s.mixTier === activeMixTier) ?? mixSlips[0])
+      : (slips.find((s) => s.marketId === activeMarket && !s.rebetOf) ??
+        slips.find((s) => s.marketId === activeMarket))
 
   const rebetsForMarket = slips.filter((s) => s.marketId === activeMarket && s.rebetOf)
 
@@ -210,8 +218,8 @@ export default function App() {
               Lotto<span>Slips</span>
             </h1>
             <p>
-              Weekly value multibets with Asian handicap legs for bigger payouts. MIX prioritises
-              AH + juicy prices. FT scores settle TTS / O1.5 / U4.5 / DC / AH / SW.
+              Three MIX tiers (Safe / Value / Moonshot) scored by expected value — each shows hit
+              chance and EV return. FT scores settle TTS / O1.5 / U4.5 / DC / AH / SW.
             </p>
           </div>
           <div className="hero-actions">
@@ -270,7 +278,7 @@ export default function App() {
           <div className="panel-head">
             <h2>{week?.label ?? 'Active week'}</h2>
             <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>
-              {primarySlips.length}/7 slips · card v{card.cardVersion || CARD_VERSION}
+              {primarySlips.length}/7 markets · 3 MIX tiers · card v{card.cardVersion || CARD_VERSION}
               {cardLoading ? ' · loading…' : ''}
             </span>
           </div>
@@ -278,7 +286,10 @@ export default function App() {
             <div className="market-tabs">
               {MARKET_ORDER.map((id) => {
                 const meta = MARKETS[id]
-                const slip = slips.find((s) => s.marketId === id && !s.rebetOf)
+                const slip =
+                  id === 'mixed'
+                    ? mixSlips.find((s) => s.mixTier === activeMixTier) ?? mixSlips[0]
+                    : slips.find((s) => s.marketId === id && !s.rebetOf)
                 const won = slip?.legs.filter((l) => l.result === 'won').length ?? 0
                 const lost = slip?.legs.filter((l) => l.result === 'lost').length ?? 0
                 return (
@@ -291,7 +302,13 @@ export default function App() {
                   >
                     <strong>{meta.shortLabel}</strong>
                     <small>
-                      {slip ? `${slip.legs.length} legs` : '—'}
+                      {id === 'mixed'
+                        ? mixSlips.length
+                          ? `${mixSlips.length} tiers`
+                          : '—'
+                        : slip
+                          ? `${slip.legs.length} legs`
+                          : '—'}
                       {won + lost > 0 ? ` · ${won}W/${lost}L` : ''}
                     </small>
                   </button>
@@ -306,6 +323,25 @@ export default function App() {
 
             {activeSlip ? (
               <>
+                {activeMarket === 'mixed' && mixSlips.length > 0 && (
+                  <div className="mix-tier-tabs">
+                    {MIX_TIER_CONFIGS.map((tier) => {
+                      const tierSlip = mixSlips.find((s) => s.mixTier === tier.tier)
+                      if (!tierSlip) return null
+                      return (
+                        <button
+                          key={tier.tier}
+                          type="button"
+                          className={`mix-tier-tab ${activeMixTier === tier.tier ? 'active' : ''}`}
+                          onClick={() => setActiveMixTier(tier.tier)}
+                        >
+                          <strong>{tier.label}</strong>
+                          <small>{tierSlip.legs.length} legs</small>
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
                 <SlipPanel
                   slip={activeSlip}
                   onSetResult={(legId, result) => setLegResult(activeSlip.id, legId, result)}

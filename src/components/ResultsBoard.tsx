@@ -41,7 +41,12 @@ export function ResultsBoard({ slips, onJumpMarket }: Props) {
                     style={{ borderColor: meta.color }}
                     onClick={() => onJumpMarket(slip.marketId)}
                   >
-                    <span style={{ color: meta.color }}>{meta.shortLabel}</span>
+                    <span style={{ color: meta.color }}>
+                      {meta.shortLabel}
+                      {slip.mixTier
+                        ? ` ${slip.mixTier.charAt(0).toUpperCase()}${slip.mixTier.slice(1)}`
+                        : ''}
+                    </span>
                     <span>
                       {summary.won}W · {summary.lost}L · {summary.voided}V · {summary.pending} left
                     </span>

@@ -229,6 +229,74 @@ a {
   background: color-mix(in srgb, var(--accent, var(--tts)) 14%, transparent);
 }
 
+.mix-tier-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.mix-tier-tab {
+  flex: 1;
+  min-width: 7rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.mix-tier-tab strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.92rem;
+}
+
+.mix-tier-tab small {
+  font-size: 0.78rem;
+}
+
+.mix-tier-tab.active {
+  border-color: color-mix(in srgb, #c084fc 55%, transparent);
+  background: color-mix(in srgb, #c084fc 12%, transparent);
+  color: var(--text);
+}
+
+.acca-ev-banner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, #c084fc 35%, var(--line));
+  background: color-mix(in srgb, #c084fc 8%, var(--surface-2));
+}
+
+.acca-ev-banner strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.acca-ev-banner strong small {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.acca-ev-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 0.15rem;
+}
+
 .slip-meta {
   display: flex;
   flex-wrap: wrap;
